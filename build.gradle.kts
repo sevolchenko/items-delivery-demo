@@ -21,11 +21,18 @@ allprojects {
 
     dependencies {
         val detektVersion: String by project
+        val junitExtensionVersion: String by project
+        val kotlinLoggingVersion: String by project
 
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.springframework.boot:spring-boot-starter")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.github.glytching:junit-extensions:$junitExtensionVersion")
     }
 
     tasks.detekt {
