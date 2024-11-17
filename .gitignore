@@ -1,0 +1,58 @@
+# Gradle
+.gradle/
+build/
+
+# Кеши и артефакты
+*~
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.log
+*.lock
+
+# IDE
+.idea/
+*.iml
+
+# Файлы настройки IntelliJ IDEA
+*.ipr
+*.iws
+
+# Директории, связанные с IDE
+out/
+.idea/
+*.class
+
+# Кеши, временные файлы и сборки
+*~
+*.tmp
+*.temp
+*.swp
+*.bak
+*.orig
+
+# Конфиденциальные файлы
+*.env
+
+# Логи
+*.log
+
+# Кэш сборки
+/build/
+/.gradle/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Android Studio specific
+captures/
+.externalNativeBuild/
+.idea/caches/gradle_models
+.idea/gradle.xml
+.idea/libraries
+.idea/workspace.xml
+.gradle/
+local.properties
