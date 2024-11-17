@@ -3,11 +3,15 @@ pluginManagement {
         mavenCentral()
     }
 
+    val springBootVersion: String by settings
+    val springDependencyManagementVersion: String by settings
+    val kotlinVersion: String by settings
+
     plugins {
-        id("org.springframework.boot") version "3.3.5"
-        id("io.spring.dependency-management") version "1.1.4"
-        kotlin("jvm") version "1.9.25"
-        kotlin("plugin.spring") version "1.9.25"
+        id("org.springframework.boot") version springBootVersion
+        id("io.spring.dependency-management") version springDependencyManagementVersion
+        kotlin("jvm") version kotlinVersion
+        kotlin("plugin.spring") version kotlinVersion
     }
 }
 
