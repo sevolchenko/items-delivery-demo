@@ -23,6 +23,7 @@ allprojects {
         val detektVersion: String by project
 
         implementation("org.springframework.boot:spring-boot-starter")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
     }
