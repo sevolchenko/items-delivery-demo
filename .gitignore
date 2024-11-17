@@ -42,6 +42,7 @@ out/
 # Кэш сборки
 /build/
 /.gradle/
+!gradle/wrapper/gradle-wrapper.jar
 
 # Системные файлы
 .DS_Store
