@@ -19,10 +19,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-springBoot {
-    mainClass = "ru.tbank.itemsdeliverydemo.itemsstorage.ItemsStorageApplication"
-}
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }
