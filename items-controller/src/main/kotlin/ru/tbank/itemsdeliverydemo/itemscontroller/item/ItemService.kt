@@ -12,7 +12,7 @@ class ItemService(
 
     @Transactional
     fun reserveItem(
-        type: String?,
+        type: String,
         color: String?
     ): Long? {
         val item = itemRepository.findFirstAvailableItem(type, color)
