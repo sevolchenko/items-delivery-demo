@@ -9,11 +9,13 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ErrorResponse
+import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ReserveItemRequest
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ReserveItemResponse
 
 @Tag(name = "Items")
@@ -24,7 +26,7 @@ class ItemController(
 ) {
 
     @Operation(
-        summary = "Зарезервировать товар по опциональными параметрами",
+        summary = "Зарезервировать товар по параметрами",
         description = "Ищет товар со статусом AVAILABLE, меняет его статус на RESERVED и возвращает его id",
         responses = [
             ApiResponse(
@@ -51,10 +53,9 @@ class ItemController(
     )
     @PostMapping("/reserve")
     fun reserveItem(
-        @RequestParam type: String,
-        @RequestParam(required = false) color: String?
+        @RequestBody request: ReserveItemRequest
     ): ResponseEntity<*> {
-        val reservedItemId = itemService.reserveItem(type, color)
+        val reservedItemId = itemService.reserveItem(request.type, request.color)
             ?: return ResponseEntity
                 .status(HttpStatus.NOT_FOUND).body(ErrorResponse("No available item found"))
 
