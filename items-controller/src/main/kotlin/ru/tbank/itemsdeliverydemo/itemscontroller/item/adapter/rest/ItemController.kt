@@ -51,7 +51,7 @@ class ItemController(
     )
     @PostMapping("/reserve")
     fun reserveItem(
-        @RequestParam(required = false) type: String?,
+        @RequestParam type: String,
         @RequestParam(required = false) color: String?
     ): ResponseEntity<*> {
         val reservedItemId = itemService.reserveItem(type, color)

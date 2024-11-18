@@ -9,6 +9,6 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
 @Repository
 interface ItemRepository : JpaRepository<Item, Long> {
 
-    @Query("SELECT i FROM Item i WHERE i.status = 'AVAILABLE' AND (:type IS NULL OR i.type = :type) AND (:color IS NULL OR i.color = :color)")
-    fun findFirstAvailableItem(@Param("type") type: String?, @Param("color") color: String?): Item?
+    @Query("SELECT i FROM Item i WHERE i.status = 'AVAILABLE' AND i.type = :type AND (:color IS NULL OR i.color = :color)")
+    fun findFirstAvailableItem(@Param("type") type: String, @Param("color") color: String?): Item?
 }
