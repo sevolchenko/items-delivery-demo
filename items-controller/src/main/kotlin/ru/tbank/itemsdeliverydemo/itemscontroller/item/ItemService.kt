@@ -18,10 +18,9 @@ class ItemService(
     ): Long? {
         val item = itemRepository.findFirstAvailableItem(type, color)
 
-        return item?.let {
-            it.status = ItemStatus.RESERVED
-            it.updatedAt = LocalDateTime.now()
-            itemRepository.save(it).id
-        }
+        return item?.apply {
+            status = ItemStatus.RESERVED
+            updatedAt = LocalDateTime.now()
+        }?.id
     }
 }
