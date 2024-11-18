@@ -22,7 +22,8 @@ data class Item(
 
     @Enumerated(EnumType.STRING)
     var status: ItemStatus = ItemStatus.AVAILABLE,
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime? = null
 ) {
     constructor() : this(type = "Default", color = null)
 }
