@@ -16,6 +16,8 @@ interface ItemRepository : JpaRepository<Item, Long> {
             WHERE i.status = 'AVAILABLE'
                 AND i.type = :type
                 AND (:color IS NULL OR i.color = :color)
+            ORDER BY i.createdAt
+            LIMIT 1
         """
     )
     fun findFirstAvailableItem(@Param("type") type: String, @Param("color") color: String?): Item?
