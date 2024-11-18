@@ -16,11 +16,11 @@ class ItemService(
         type: String,
         color: String?
     ): Long? {
-        val item = itemRepository.findFirstAvailableItem(type, color)
+        val item = itemRepository.findFirstAvailableItem(type, color) ?: return null
 
-        return item?.apply {
+        return item.apply {
             status = ItemStatus.RESERVED
             updatedAt = LocalDateTime.now()
-        }?.id
+        }.id
     }
 }
