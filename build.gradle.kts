@@ -23,6 +23,7 @@ allprojects {
         val detektVersion: String by project
         val junitExtensionVersion: String by project
         val kotlinLoggingVersion: String by project
+        val mockitoKotlinVersion: String by project
 
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -33,6 +34,7 @@ allprojects {
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.github.glytching:junit-extensions:$junitExtensionVersion")
+        testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion")
     }
 
     tasks.detekt {
