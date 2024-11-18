@@ -41,8 +41,6 @@ class ItemServiceTest {
         val item = Item(id = id, type = type, color = color)
         whenever(repository.findFirstAvailableItem(type, color))
             .thenReturn(item)
-        whenever(repository.save(any()))
-            .thenReturn(item)
 
         val result = service.reserveItem(type, color)
 
