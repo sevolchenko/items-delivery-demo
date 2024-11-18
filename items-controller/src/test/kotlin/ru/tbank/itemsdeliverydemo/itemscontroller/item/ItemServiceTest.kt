@@ -1,13 +1,12 @@
 package ru.tbank.itemsdeliverydemo.itemscontroller.item
 
-import com.nhaarman.mockitokotlin2.any
-import io.github.glytching.junit.extension.random.RandomBeansExtension
-import org.junit.jupiter.api.extension.ExtendWith
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.github.glytching.junit.extension.random.Random
+import io.github.glytching.junit.extension.random.RandomBeansExtension
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepository
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
