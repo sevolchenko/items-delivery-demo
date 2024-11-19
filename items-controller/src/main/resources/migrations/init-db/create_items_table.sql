@@ -1,13 +1,9 @@
--- Create Sequences
--- ================================================================
-create sequence item_sequence start with 1 increment by 1;
-
 -- Create Tables
 -- ================================================================
 -- Document
 create table item
 (
-    id              bigint            not null default nextVal('item_sequence'),
+    id              uuid              not null default gen_random_uuid(),
     type            varchar(255)      not null,
     color           varchar(255)      null     default null,
     status          varchar(255)      not null default 'AVAILABLE',
