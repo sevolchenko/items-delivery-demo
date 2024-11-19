@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepository
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
+import java.util.UUID
 
 @ExtendWith(RandomBeansExtension::class)
 class ItemServiceTest {
@@ -33,7 +34,7 @@ class ItemServiceTest {
 
     @Test
     fun `where item found then return it's id and set status to reserved`(
-        @Random id: Long,
+        @Random id: UUID,
         @Random type: String,
         @Random color: String,
     ) {
