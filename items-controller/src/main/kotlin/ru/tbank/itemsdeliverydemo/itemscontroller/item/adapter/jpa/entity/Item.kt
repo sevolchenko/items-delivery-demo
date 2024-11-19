@@ -9,13 +9,14 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
 import java.time.LocalDateTime
+import java.util.*
 
 @Entity
-@Table(name = "items")
+@Table(name = "item")
 data class Item(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: UUID? = null,
 
     val type: String,
     val color: String?,
