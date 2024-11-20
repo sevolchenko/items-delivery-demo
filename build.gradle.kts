@@ -9,15 +9,17 @@ plugins {
 }
 
 allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "io.gitlab.arturbosch.detekt")
-
-    repositories {
-        mavenCentral()
-    }
 
     dependencies {
         val detektVersion: String by project
@@ -37,9 +39,11 @@ allprojects {
         testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion")
     }
 
-    tasks.detekt {
+    configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+        toolVersion = project.properties["detektVersion"] as String
         autoCorrect = true
-        config = files("${project.rootDir}/config/detekt/detekt.yaml")
+        buildUponDefaultConfig = true
+        config.from(files("${project.rootDir}/config/detekt/detekt.yaml"))
     }
 
     tasks.check {
