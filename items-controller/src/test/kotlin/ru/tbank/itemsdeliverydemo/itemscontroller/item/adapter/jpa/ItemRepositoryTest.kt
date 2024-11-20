@@ -18,11 +18,13 @@ class ItemRepositoryTest {
     private lateinit var itemRepository: ItemRepository
 
     @Test
-    @Sql(statements = [
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'red', 'AVAILABLE')",
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')"
-    ])
+    @Sql(
+        statements = [
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'red', 'AVAILABLE')",
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')"
+        ]
+    )
     fun `test findFirstAvailableItem with color`() {
         val result = itemRepository.findFirstAvailableItem("exampleType", "red")
 
@@ -31,11 +33,13 @@ class ItemRepositoryTest {
     }
 
     @Test
-    @Sql(statements = [
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')",
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
-        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')"
-    ])
+    @Sql(
+        statements = [
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')",
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')"
+        ]
+    )
     fun `test findFirstAvailableItem without color`() {
         val result = itemRepository.findFirstAvailableItem("exampleType", null)
 

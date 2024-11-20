@@ -45,11 +45,10 @@ class ItemServiceTest {
         val result = service.reserveItem(type, color)
 
         assertThat(result).isEqualTo(id)
-        with (item) {
+        with(item) {
             assertThat(status).isEqualTo(ItemStatus.RESERVED)
             assertThat(updatedAt).isNotNull()
             assertThat(updatedAt).isAfter(createdAt)
         }
     }
-
 }
