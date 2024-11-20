@@ -19,9 +19,9 @@ class ItemRepositoryTest {
 
     @Test
     @Sql(statements = [
-        "INSERT INTO item (id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', 'red', 'AVAILABLE', CURRENT_TIMESTAMP)",
-        "INSERT INTO item (id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED', CURRENT_TIMESTAMP)",
-        "INSERT INTO item (id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE', CURRENT_TIMESTAMP)"
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'red', 'AVAILABLE')",
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')"
     ])
     fun `test findFirstAvailableItem with color`() {
         val result = itemRepository.findFirstAvailableItem("exampleType", "red")
@@ -32,9 +32,9 @@ class ItemRepositoryTest {
 
     @Test
     @Sql(statements = [
-        "INSERT INTO item(id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE', CURRENT_TIMESTAMP)",
-        "INSERT INTO item(id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED', CURRENT_TIMESTAMP)",
-        "INSERT INTO item(id, type, color, status, created_at) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED', CURRENT_TIMESTAMP)"
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')",
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+        "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')"
     ])
     fun `test findFirstAvailableItem without color`() {
         val result = itemRepository.findFirstAvailableItem("exampleType", null)
