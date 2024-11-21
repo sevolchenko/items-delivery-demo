@@ -2,9 +2,8 @@ spring:
   application:
     name: items-controller
 
-  datasource:
-    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
 
   liquibase:
-    driver-class-name: org.postgresql.Driver
     change-log: migrations/master.xml

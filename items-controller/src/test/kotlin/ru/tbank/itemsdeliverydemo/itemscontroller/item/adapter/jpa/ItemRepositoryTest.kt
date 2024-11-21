@@ -3,16 +3,11 @@ package ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.jdbc.Sql
+import ru.tbank.itemsdeliverydemo.itemscontroller.IntegrationEnvironment
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
 
-@DataJpaTest
-@AutoConfigureTestDatabase
-@ActiveProfiles("test")
-class ItemRepositoryTest {
+class ItemRepositoryTest : IntegrationEnvironment() {
 
     @Autowired
     private lateinit var itemRepository: ItemRepository
@@ -20,9 +15,9 @@ class ItemRepositoryTest {
     @Test
     @Sql(
         statements = [
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'red', 'AVAILABLE')",
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')"
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', 'red', 'AVAILABLE')",
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', NULL, 'AVAILABLE')"
         ]
     )
     fun `test findFirstAvailableItem with color`() {
@@ -35,9 +30,9 @@ class ItemRepositoryTest {
     @Test
     @Sql(
         statements = [
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', NULL, 'AVAILABLE')",
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')",
-            "INSERT INTO item (id, type, color, status) VALUES (random_uuid(), 'exampleType', 'blue', 'RESERVED')"
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', NULL, 'AVAILABLE')",
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', 'blue', 'RESERVED')",
+            "INSERT INTO item (id, type, color, status) VALUES (gen_random_uuid(), 'exampleType', 'blue', 'RESERVED')"
         ]
     )
     fun `test findFirstAvailableItem without color`() {
