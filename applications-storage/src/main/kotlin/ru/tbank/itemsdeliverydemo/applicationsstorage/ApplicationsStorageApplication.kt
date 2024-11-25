@@ -1,11 +1,11 @@
-package ru.tbank.itemsdeliverydemo.itemsstorage
+package ru.tbank.itemsdeliverydemo.applicationsstorage
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ItemsStorageApplication
+class ApplicationsStorageApplication
 
 fun main(args: Array<String>) {
-    runApplication<ItemsStorageApplication>(*args)
+    runApplication<ApplicationsStorageApplication>(*args)
 }
