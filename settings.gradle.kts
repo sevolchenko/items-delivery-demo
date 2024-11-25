@@ -19,7 +19,7 @@ pluginManagement {
 
 rootProject.name = "items-delivery-demo"
 
-include("items-storage")
+include("applications-storage")
 include("items-process")
 include("items-controller")
 include("items-keeper")
