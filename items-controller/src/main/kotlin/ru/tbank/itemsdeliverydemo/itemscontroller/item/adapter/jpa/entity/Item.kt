@@ -18,13 +18,11 @@ data class Item(
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
 
-    val type: String,
-    val color: String?,
+    val type: String = "Default",
+    val color: String? = null,
 
     @Enumerated(EnumType.STRING)
     var status: ItemStatus = ItemStatus.AVAILABLE,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime? = null
-) {
-    constructor() : this(type = "Default", color = null)
-}
+)
