@@ -30,10 +30,11 @@ class ItemService(
         type: String,
         color: String?,
         quantity: Int
-    ): List<UUID>? {
-        val uuidList = (1..quantity).mapNotNull {
-            itemRepository.save(Item(type = type, color = color)).id
+    ): List<UUID> {
+        val uuidList = mutableListOf<UUID>()
+        repeat(quantity){
+            itemRepository.save(Item(type = type, color = color)).id?.let { it1 -> uuidList.add(it1) }
         }
-        return uuidList.takeIf { it.isNotEmpty() }
+        return uuidList;
     }
 }
