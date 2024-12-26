@@ -29,7 +29,7 @@ class MaintenanceController(
         description = "Добавляет элеметы с одинаковым цветом и типом, и возвращает массив их id",
         responses = [
             ApiResponse(
-                responseCode = "201",
+                responseCode = "200",
                 description = "Элементы успешно добавлены",
                 content = [
                     Content(
@@ -58,6 +58,6 @@ class MaintenanceController(
             ?: return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST).body(ErrorResponse("Invalid request parameters"))
 
-        return ResponseEntity.ok().body(CreateItemResponse(createdItemsId))
+        return ResponseEntity.ok().body(createdItemsId)
     }
 }
