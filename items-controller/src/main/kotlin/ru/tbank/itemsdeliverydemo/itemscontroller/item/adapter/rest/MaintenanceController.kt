@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -55,8 +54,6 @@ class MaintenanceController(
         @Valid @RequestBody request: CreateItemRequest
     ): ResponseEntity<*> {
         val createdItemsId = itemService.createItems(request.type, request.color, request.quantity)
-            ?: return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST).body(ErrorResponse("Invalid request parameters"))
 
         return ResponseEntity.ok().body(createdItemsId)
     }
