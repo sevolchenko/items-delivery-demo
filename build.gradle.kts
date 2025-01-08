@@ -39,6 +39,14 @@ subprojects {
         testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion")
     }
 
+    dependencyManagement {
+        dependencies {
+            val springDocVersion: String by project
+
+            dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
+        }
+    }
+
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         toolVersion = project.properties["detektVersion"] as String
         autoCorrect = true
