@@ -13,12 +13,10 @@ repositories {
 }
 
 dependencies {
-    val springDocVersion: String by project
-
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.liquibase:liquibase-core")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
     runtimeOnly("org.postgresql:postgresql")
 
