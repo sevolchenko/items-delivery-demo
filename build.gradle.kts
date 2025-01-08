@@ -42,8 +42,11 @@ subprojects {
     dependencyManagement {
         dependencies {
             val springDocVersion: String by project
+            val mapstructVersion: String by project
 
             dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
+            dependency("org.mapstruct:mapstruct:$mapstructVersion")
+            dependency("org.mapstruct:mapstruct-processor:$mapstructVersion")
         }
     }
 

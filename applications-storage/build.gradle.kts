@@ -18,6 +18,9 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
+    implementation("org.mapstruct:mapstruct")
+    annotationProcessor("org.mapstruct:mapstruct-processor")
+
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.testcontainers:junit-jupiter")
