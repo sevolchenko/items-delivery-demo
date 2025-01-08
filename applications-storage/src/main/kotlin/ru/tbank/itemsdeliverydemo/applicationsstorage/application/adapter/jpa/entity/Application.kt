@@ -15,8 +15,11 @@ import java.util.UUID
 @Table(name = "application")
 data class Application(
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
+    val integrationId: String? = null,
 
     @Enumerated(EnumType.STRING)
     var status: ApplicationStatus = ApplicationStatus.CREATED,
