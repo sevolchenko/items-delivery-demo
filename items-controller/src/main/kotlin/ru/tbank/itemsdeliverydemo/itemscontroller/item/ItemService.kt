@@ -33,7 +33,8 @@ class ItemService(
     ): List<UUID> {
         val uuidList = mutableListOf<UUID>()
         repeat(quantity) {
-            itemRepository.save(Item(type = type, color = color)).id?.let { it1 -> uuidList.add(it1) }
+            val savedItemId = itemRepository.save(Item(type = type, color = color)).id
+            savedItemId?.let { id -> uuidList.add(id) }
         }
         return uuidList
     }
