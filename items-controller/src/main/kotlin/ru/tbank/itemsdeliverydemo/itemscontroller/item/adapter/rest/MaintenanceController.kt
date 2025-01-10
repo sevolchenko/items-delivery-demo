@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.CreateItemRequest
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.CreateItemResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ErrorResponse
+import java.util.UUID
 
 @Tag(name = "Maintenance")
 @RestController
@@ -32,7 +32,7 @@ class MaintenanceController(
                 description = "Элементы успешно добавлены",
                 content = [
                     Content(
-                        schema = Schema(implementation = CreateItemResponse::class),
+                        schema = Schema(implementation = Array<UUID>::class),
                         mediaType = MediaType.APPLICATION_JSON_VALUE
                     )
                 ]
