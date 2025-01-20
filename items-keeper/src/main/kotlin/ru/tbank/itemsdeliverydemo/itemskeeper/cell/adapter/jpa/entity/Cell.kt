@@ -21,4 +21,3 @@ data class Cell(
     @ManyToOne
     val cellCharacteristics: CellCharacteristics? = null
 )
-
