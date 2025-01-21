@@ -12,8 +12,8 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "storage_status_history")
-data class StorageStatusHistory(
+@Table(name = "placement_status_history")
+data class PlacementStatusHistory(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
