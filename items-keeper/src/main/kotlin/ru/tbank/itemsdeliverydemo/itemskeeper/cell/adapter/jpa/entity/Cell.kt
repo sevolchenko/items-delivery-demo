@@ -19,5 +19,5 @@ data class Cell(
     val name: String = "Default",
 
     @ManyToOne
-    val cellCharacteristics: CellDimensions? = null
+    val cellDimensions: CellDimensions? = null
 )
