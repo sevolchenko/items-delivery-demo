@@ -14,15 +14,15 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "keeper")
-data class Keeper(
+@Table(name = "placement")
+data class Placement(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
     val productId: UUID? = null,
 
     @ManyToOne
-    val cellId: Cell? = null,
+    val cell: Cell? = null,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime? = null,

@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.itemskeeper.cellcharacteristics.adapter.jpa.entity.CellCharacteristics
+import ru.tbank.itemsdeliverydemo.itemskeeper.cellcharacteristics.adapter.jpa.entity.CellDimensions
 import java.util.UUID
 
 @Entity
@@ -14,10 +14,10 @@ import java.util.UUID
 data class Cell(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
+    val id: UUID = UUID.randomUUID(),
 
-    val name: String? = null,
+    val name: String = "Default",
 
     @ManyToOne
-    val cellCharacteristics: CellCharacteristics? = null
+    val cellCharacteristics: CellDimensions? = null
 )
