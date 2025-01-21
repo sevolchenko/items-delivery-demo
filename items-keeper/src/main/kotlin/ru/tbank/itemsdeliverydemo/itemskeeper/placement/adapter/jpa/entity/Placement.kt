@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.itemskeeper.keeper.adapter.jpa.entity
+package ru.tbank.itemsdeliverydemo.itemskeeper.placement.adapter.jpa.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -9,7 +9,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
-import ru.tbank.itemsdeliverydemo.itemskeeper.keeper.model.KeeperStatus
+import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.KeeperStatus
 import java.time.LocalDateTime
 import java.util.UUID
 

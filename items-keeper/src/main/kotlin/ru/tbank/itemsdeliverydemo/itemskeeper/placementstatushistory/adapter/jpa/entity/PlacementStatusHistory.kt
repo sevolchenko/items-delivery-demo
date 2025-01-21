@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.itemskeeper.storagestatushistory.adapter.jpa.entity
+package ru.tbank.itemsdeliverydemo.itemskeeper.placementstatushistory.adapter.jpa.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
-import ru.tbank.itemsdeliverydemo.itemskeeper.keeper.model.KeeperStatus
+import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.KeeperStatus
 import java.time.LocalDateTime
 import java.util.UUID
 

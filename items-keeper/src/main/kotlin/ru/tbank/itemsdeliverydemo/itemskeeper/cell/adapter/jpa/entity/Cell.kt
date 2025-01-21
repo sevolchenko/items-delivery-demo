@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.itemskeeper.cellcharacteristics.adapter.jpa.entity.CellDimensions
+import ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.entity.CellDimensions
 import java.util.UUID
 
 @Entity
