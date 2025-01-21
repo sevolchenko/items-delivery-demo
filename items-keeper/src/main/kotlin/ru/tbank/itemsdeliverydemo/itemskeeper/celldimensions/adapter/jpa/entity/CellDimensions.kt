@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.itemskeeper.cellcharacteristics.adapter.jpa.entity
+package ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
