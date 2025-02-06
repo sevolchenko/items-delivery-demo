@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.ApplicationService
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.ApplicationResponse
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.ErrorResponse
+import ru.tbank.itemsdeliverydemo.applicationsstorage.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
 
 @RestController

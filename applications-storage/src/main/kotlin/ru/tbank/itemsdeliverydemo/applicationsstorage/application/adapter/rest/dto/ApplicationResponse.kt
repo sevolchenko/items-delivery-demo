@@ -6,5 +6,6 @@ import java.time.LocalDateTime
 data class ApplicationResponse(
     val integrationId: String,
     val status: ApplicationStatus,
+    val products: List<ProductResponse>,
     val createdAt: LocalDateTime
 )
