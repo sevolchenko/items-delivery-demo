@@ -11,9 +11,9 @@ class ApplicationService(
 ) {
 
     fun getApplication(
-        id: String
+        integrationId: String
     ): Application? {
-        return repository.findApplicationByIntegrationId(id).getOrNull()
+        return repository.findApplicationByIntegrationId(integrationId).getOrNull()
     }
 
 }
