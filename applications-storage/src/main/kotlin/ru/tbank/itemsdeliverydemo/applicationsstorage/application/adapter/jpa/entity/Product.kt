@@ -1,20 +1,17 @@
 package ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity
 
 import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
+import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ProductType
 import java.time.LocalDateTime
-import java.util.UUID
 
 @Entity
-@Table(name = "application")
-data class Application(
+@Table(name = "product")
+data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -22,11 +19,14 @@ data class Application(
     @GeneratedValue(strategy = GenerationType.UUID)
     val integrationId: String? = null,
 
-    @Enumerated(EnumType.STRING)
-    var status: ApplicationStatus = ApplicationStatus.CREATED,
+    val type: ProductType? = null,
 
-    @OneToMany
-    val products: List<Product> = emptyList(),
+    val customText: String? = null,
+
+    @ManyToOne
+    val application: Application? = null,
+
+    var itemNumber: String? = null,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime? = null
