@@ -5,6 +5,8 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.Ap
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Product
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.CreateApplicationRequest
+import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
+import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Service
@@ -29,6 +31,16 @@ class ApplicationService(
         val application = Application(products = listOf(product))
 
         return repository.save(application)
+    }
+
+    fun updateApplicationStatus(
+        integrationId: String,
+        status: ApplicationStatus
+    ): Application? {
+        return getApplication(integrationId)?.apply {
+            this.status = status
+            updatedAt = LocalDateTime.now()
+        }
     }
 
 }
