@@ -6,12 +6,15 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.en
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Product
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.CreateApplicationRequest
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
+import ru.tbank.itemsdeliverydemo.applicationsstorage.component.KafkaProducer
+import ru.tbank.itemsdeliverydemo.applicationsstorage.component.ProcessingStarter
 import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Service
 class ApplicationService(
-    private val repository: ApplicationRepository
+    private val repository: ApplicationRepository,
+    private val processingStarter: ProcessingStarter
 ) {
 
     fun getApplication(
@@ -30,7 +33,9 @@ class ApplicationService(
 
         val application = Application(products = listOf(product))
 
-        return repository.save(application)
+        return repository.save(application).also {
+            processingStarter.startProcessing(it.integrationId)
+        }
     }
 
     fun updateApplicationStatus(

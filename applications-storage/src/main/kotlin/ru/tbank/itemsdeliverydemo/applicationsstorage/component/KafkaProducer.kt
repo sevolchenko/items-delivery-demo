@@ -5,12 +5,12 @@ import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class KafkaSender(
+class KafkaProducer(
     private val kafkaTemplate: KafkaTemplate<String, String>,
     private val objectMapper: ObjectMapper
 ) {
 
-    fun <T> sendMessage(topic: String, message: T) {
+    fun <T> send(topic: String, message: T) {
         val messageString = objectMapper.writeValueAsString(message)
 
         kafkaTemplate.send(topic, messageString)
