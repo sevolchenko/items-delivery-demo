@@ -22,6 +22,9 @@ dependencies {
     implementation("org.mapstruct:mapstruct")
     kapt("org.mapstruct:mapstruct-processor")
 
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.kafka:spring-kafka")
+
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.testcontainers:junit-jupiter")
