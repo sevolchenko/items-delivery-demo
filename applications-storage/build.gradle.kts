@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("jvm")
     kotlin("plugin.spring")
+    kotlin("kapt")
 }
 
 group = "ru.tbank.items-delivery-demo"
@@ -19,7 +20,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
     implementation("org.mapstruct:mapstruct")
-    annotationProcessor("org.mapstruct:mapstruct-processor")
+    kapt("org.mapstruct:mapstruct-processor")
 
     runtimeOnly("org.postgresql:postgresql")
 
