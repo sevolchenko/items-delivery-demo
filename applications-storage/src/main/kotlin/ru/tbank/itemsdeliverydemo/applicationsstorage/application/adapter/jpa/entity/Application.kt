@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
 import java.time.LocalDateTime
+import java.util.UUID
 
 @Entity
 @Table(name = "application")
@@ -18,8 +19,7 @@ data class Application(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val integrationId: String? = null,
+    val integrationId: String = UUID.randomUUID().toString(),
 
     var pickupCode: String? = null,
 

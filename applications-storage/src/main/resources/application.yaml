@@ -1,3 +1,10 @@
 spring:
   application:
     name: applications-storage
+
+  jpa:
+    database: postgresql
+
+  liquibase:
+    change-log: migrations/master.xml
+    enabled: false

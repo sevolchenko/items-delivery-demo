@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ProductType
 import java.time.LocalDateTime
+import java.util.UUID
 
 @Entity
 @Table(name = "product")
@@ -16,8 +17,7 @@ data class Product(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val integrationId: String? = null,
+    val integrationId: String = UUID.randomUUID().toString(),
 
     val type: ProductType? = null,
 
