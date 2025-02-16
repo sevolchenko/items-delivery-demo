@@ -23,9 +23,6 @@ data class Product(
 
     val customText: String? = null,
 
-    @ManyToOne
-    val application: Application? = null,
-
     var itemNumber: String? = null,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),

@@ -1,11 +1,13 @@
 package ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
@@ -26,7 +28,8 @@ data class Application(
     @Enumerated(EnumType.STRING)
     var status: ApplicationStatus = ApplicationStatus.CREATED,
 
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JoinColumn(name = "application_id")
     val products: List<Product> = emptyList(),
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
