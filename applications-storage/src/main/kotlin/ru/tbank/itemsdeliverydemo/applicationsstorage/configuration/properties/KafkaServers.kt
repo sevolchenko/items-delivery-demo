@@ -8,5 +8,4 @@ import org.springframework.context.annotation.Configuration
 class KafkaServers {
 
     lateinit var bootstrapServers: String
-
 }

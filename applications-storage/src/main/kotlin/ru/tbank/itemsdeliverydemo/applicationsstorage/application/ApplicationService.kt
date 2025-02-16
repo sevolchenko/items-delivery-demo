@@ -6,7 +6,6 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.en
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Product
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.CreateApplicationRequest
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
-import ru.tbank.itemsdeliverydemo.applicationsstorage.component.KafkaProducer
 import ru.tbank.itemsdeliverydemo.applicationsstorage.component.ProcessingStarter
 import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull

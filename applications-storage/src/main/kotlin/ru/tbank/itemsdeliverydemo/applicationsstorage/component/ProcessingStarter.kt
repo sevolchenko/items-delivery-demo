@@ -20,7 +20,6 @@ class ProcessingStarter(
             )
         )
     }
-
 }
 
 data class StartProcessingEvent(
