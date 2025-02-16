@@ -64,53 +64,53 @@ class PublicApplicationController(
                 ]
             ),
             ApiResponse(
-               responseCode = "404",
-               description = "Заявка не найдена",
-               content = [
-                   Content(
-                       schema = Schema(implementation = ErrorResponse::class),
-                       mediaType = MediaType.APPLICATION_JSON_VALUE
-                   )
-               ]
+                responseCode = "404",
+                description = "Заявка не найдена",
+                content = [
+                    Content(
+                        schema = Schema(implementation = ErrorResponse::class),
+                        mediaType = MediaType.APPLICATION_JSON_VALUE
+                    )
+                ]
             )
         ]
     )
     @GetMapping("/{id}/status")
     fun getApplicationStatus(
         @PathVariable id: String
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         return service.getApplication(id).toResponse()
     }
 
     @Operation(
         summary = "Получить код для получения заказа",
         responses = [
-           ApiResponse(
-               responseCode = "200",
-               description = "Код для получения заказа успешно получен",
-               content = [
-                  Content(
-                      schema = Schema(implementation = PublicPickupCodeResponse::class),
-                      mediaType = MediaType.APPLICATION_JSON_VALUE
-                  )
-               ]
-           ),
-           ApiResponse(
-              responseCode = "404",
-              description = "Заявка не найдена",
-              content = [
-                 Content(
-                     schema = Schema(implementation = ErrorResponse::class),
-                     mediaType = MediaType.APPLICATION_JSON_VALUE
-                 )
-              ]
-           )
+            ApiResponse(
+                responseCode = "200",
+                description = "Код для получения заказа успешно получен",
+                content = [
+                    Content(
+                        schema = Schema(implementation = PublicPickupCodeResponse::class),
+                        mediaType = MediaType.APPLICATION_JSON_VALUE
+                    )
+                ]
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Заявка не найдена",
+                content = [
+                    Content(
+                        schema = Schema(implementation = ErrorResponse::class),
+                        mediaType = MediaType.APPLICATION_JSON_VALUE
+                    )
+                ]
+            )
         ]
     )
     @GetMapping("/{id}/pickup-code")
     fun getPickupCode(
         @PathVariable id: String
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         val application = service.getApplication(id)
 
         return if (application == null) {
@@ -127,5 +127,4 @@ class PublicApplicationController(
             ResponseEntity.ok(mapper.toPublicApplicationResponse(this))
         }
     }
-
 }

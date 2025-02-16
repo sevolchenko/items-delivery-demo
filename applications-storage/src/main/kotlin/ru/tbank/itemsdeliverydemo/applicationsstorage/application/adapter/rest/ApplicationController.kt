@@ -25,7 +25,7 @@ class ApplicationController(
     @GetMapping("/{id}")
     fun getApplication(
         @PathVariable id: String
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         return service.getApplication(id).toResponse()
     }
 
@@ -33,7 +33,7 @@ class ApplicationController(
     fun setApplicationStatus(
         @PathVariable id: String,
         @RequestParam status: ApplicationStatus
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         return service.updateApplicationStatus(id, status).toResponse()
     }
 
@@ -41,7 +41,7 @@ class ApplicationController(
     fun updateApplication(
         @PathVariable id: String,
         @RequestParam pickupCode: String,
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         return service.updateApplication(id, pickupCode).toResponse()
     }
 
@@ -50,7 +50,7 @@ class ApplicationController(
         @PathVariable id: String,
         @PathVariable productId: String,
         @RequestParam itemNumber: String,
-    ) : ResponseEntity<*> {
+    ): ResponseEntity<*> {
         return service.updateProduct(id, productId, itemNumber).toResponse()
     }
 
@@ -61,5 +61,4 @@ class ApplicationController(
             ResponseEntity.ok(mapper.toApplicationResponse(this))
         }
     }
-
 }

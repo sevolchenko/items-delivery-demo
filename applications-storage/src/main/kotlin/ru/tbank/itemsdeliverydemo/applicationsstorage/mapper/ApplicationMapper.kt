@@ -14,8 +14,7 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.configuration.MapstructCon
 )
 interface ApplicationMapper {
 
-    fun toApplicationResponse(entity: Application) : ApplicationResponse
+    fun toApplicationResponse(entity: Application): ApplicationResponse
 
-    fun toPublicApplicationResponse(entity: Application) : PublicApplicationResponse
-
+    fun toPublicApplicationResponse(entity: Application): PublicApplicationResponse
 }

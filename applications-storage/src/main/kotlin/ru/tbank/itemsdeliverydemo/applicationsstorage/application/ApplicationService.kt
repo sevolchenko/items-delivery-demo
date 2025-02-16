@@ -67,6 +67,4 @@ class ApplicationService(
             updatedAt = LocalDateTime.now()
         }
     }
-
-
 }
