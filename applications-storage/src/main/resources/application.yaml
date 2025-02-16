@@ -7,7 +7,6 @@ spring:
 
   liquibase:
     change-log: migrations/master.xml
-    enabled: false
 
   kafka:
     topics:
