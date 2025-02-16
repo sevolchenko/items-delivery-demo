@@ -43,7 +43,7 @@ class PublicApplicationController(
             )
         ]
     )
-    @PostMapping
+    @PostMapping("/create")
     fun createApplication(
         @RequestBody request: CreateApplicationRequest
     ): ResponseEntity<*> {
