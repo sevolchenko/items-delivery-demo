@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -34,6 +35,23 @@ class ApplicationController(
         @RequestParam status: ApplicationStatus
     ) : ResponseEntity<*> {
         return service.updateApplicationStatus(id, status).toResponse()
+    }
+
+    @PutMapping("/{id}")
+    fun updateApplication(
+        @PathVariable id: String,
+        @RequestParam pickupCode: String,
+    ) : ResponseEntity<*> {
+        return service.updateApplication(id, pickupCode).toResponse()
+    }
+
+    @PutMapping("/{id}/products/{productId}")
+    fun updateProduct(
+        @PathVariable id: String,
+        @PathVariable productId: String,
+        @RequestParam itemNumber: String,
+    ) : ResponseEntity<*> {
+        return service.updateProduct(id, productId, itemNumber).toResponse()
     }
 
     private fun Application?.toResponse(): ResponseEntity<*> {

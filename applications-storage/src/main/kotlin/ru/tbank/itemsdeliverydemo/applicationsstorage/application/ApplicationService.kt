@@ -43,4 +43,30 @@ class ApplicationService(
         }
     }
 
+    fun updateApplication(
+        integrationId: String,
+        pickupCode: String
+    ): Application? {
+        return getApplication(integrationId)?.apply {
+            this.pickupCode = pickupCode
+            updatedAt = LocalDateTime.now()
+        }
+    }
+
+    fun updateProduct(
+        applicationId: String,
+        productId: String,
+        itemNumber: String
+    ): Application? {
+        return getApplication(applicationId)?.apply {
+            products
+                .find { it.integrationId == productId }
+                ?.apply {
+                    this.itemNumber = itemNumber
+                }
+            updatedAt = LocalDateTime.now()
+        }
+    }
+
+
 }
