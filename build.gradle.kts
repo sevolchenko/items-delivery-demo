@@ -39,6 +39,17 @@ subprojects {
         testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion")
     }
 
+    dependencyManagement {
+        dependencies {
+            val springDocVersion: String by project
+            val mapstructVersion: String by project
+
+            dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
+            dependency("org.mapstruct:mapstruct:$mapstructVersion")
+            dependency("org.mapstruct:mapstruct-processor:$mapstructVersion")
+        }
+    }
+
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         toolVersion = project.properties["detektVersion"] as String
         autoCorrect = true

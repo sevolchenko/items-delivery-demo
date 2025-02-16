@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: applications-storage
+
+  jpa:
+    database: postgresql
+
+  liquibase:
+    change-log: migrations/master.xml
+
+  kafka:
+    topics:
+      start-processing: process.start-processing
