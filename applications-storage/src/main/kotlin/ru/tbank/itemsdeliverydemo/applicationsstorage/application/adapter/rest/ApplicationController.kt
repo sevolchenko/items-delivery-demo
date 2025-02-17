@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.ApplicationService
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
-import ru.tbank.itemsdeliverydemo.applicationsstorage.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
+import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 
 @RestController
 @RequestMapping("/api/v1/applications")

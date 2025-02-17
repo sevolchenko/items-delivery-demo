@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 
 @Repository
 interface ItemRepository : JpaRepository<Item, Long> {
@@ -20,5 +21,5 @@ interface ItemRepository : JpaRepository<Item, Long> {
             LIMIT 1
         """
     )
-    fun findFirstAvailableItem(@Param("type") type: String, @Param("color") color: String?): Item?
+    fun findFirstAvailableItem(@Param("type") type: ProductType, @Param("color") color: String?): Item?
 }

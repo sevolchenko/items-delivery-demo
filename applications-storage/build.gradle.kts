@@ -19,6 +19,8 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
+    implementation(project(":common"))
+
     implementation("org.mapstruct:mapstruct")
     kapt("org.mapstruct:mapstruct-processor")
 

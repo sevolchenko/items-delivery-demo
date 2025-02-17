@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepository
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -15,7 +16,7 @@ class ItemService(
 
     @Transactional
     fun reserveItem(
-        type: String,
+        type: ProductType,
         color: String?
     ): UUID? {
         val item = itemRepository.findFirstAvailableItem(type, color) ?: return null
@@ -27,7 +28,7 @@ class ItemService(
     }
 
     fun createItems(
-        type: String,
+        type: ProductType,
         color: String?,
         quantity: Int
     ): List<UUID> {

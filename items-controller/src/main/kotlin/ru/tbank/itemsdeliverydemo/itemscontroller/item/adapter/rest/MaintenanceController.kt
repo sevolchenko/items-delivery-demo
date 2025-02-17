@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.CreateItemRequest
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ErrorResponse
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.CreateItemRequest
 import java.util.UUID
 
 @Tag(name = "Maintenance")

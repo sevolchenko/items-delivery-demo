@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepository
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import java.util.UUID
 
 @ExtendWith(RandomBeansExtension::class)
@@ -21,7 +22,7 @@ class ItemServiceTest {
 
     @Test
     fun `where item not found then return null`(
-        @Random type: String,
+        @Random type: ProductType,
         @Random color: String,
     ) {
         whenever(repository.findFirstAvailableItem(type, color))
@@ -35,7 +36,7 @@ class ItemServiceTest {
     @Test
     fun `where item found then return it's id and set status to reserved`(
         @Random id: UUID,
-        @Random type: String,
+        @Random type: ProductType,
         @Random color: String,
     ) {
         val item = Item(id = id, type = type, color = color)

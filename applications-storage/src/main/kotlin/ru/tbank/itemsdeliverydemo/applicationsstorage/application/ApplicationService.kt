@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.ApplicationRepository
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Product
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.CreateApplicationRequest
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
 import ru.tbank.itemsdeliverydemo.applicationsstorage.component.ProcessingStarter
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.CreateApplicationRequest
 import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
