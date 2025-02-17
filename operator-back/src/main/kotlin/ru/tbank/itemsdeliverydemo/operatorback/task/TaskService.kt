@@ -8,6 +8,7 @@ import ru.tbank.itemsdeliverydemo.operatorback.component.InstructionsBuilder
 import ru.tbank.itemsdeliverydemo.operatorback.component.PickupCodeGenerator
 import ru.tbank.itemsdeliverydemo.operatorback.model.TaskStatus
 import ru.tbank.itemsdeliverydemo.operatorback.model.TaskType
+import ru.tbank.itemsdeliverydemo.operatorback.model.dto.PickupTaskResponse
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskRequest
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskResponse
 import ru.tbank.itemsdeliverydemo.operatorback.streaming.TaskStatusUpdatedSender
@@ -60,7 +61,7 @@ class TaskService(
                 task.placementId = it.placementId
             }.cellId
 
-        val instructions = instructionsBuilder.buildInstructionsFor(
+        val instructions = instructionsBuilder.buildInstructionsForReservation(
             task.type!!,
             product.type,
             product.customText,
@@ -93,6 +94,29 @@ class TaskService(
         task.pickupCode = pickupCodeGenerator.generate()
 
         return updateTaskStatus(task, TaskStatus.WAITING_FOR_PICKUP)
+    }
+
+    fun pickupTask(
+        pickupCode: String
+    ): PickupTaskResponse? {
+        val task = repository.findTaskByPickupCode(pickupCode).getOrNull() ?: return null
+
+        if (task.status != TaskStatus.WAITING_FOR_PICKUP) error("Task is not in waiting for pickup state")
+
+        val cellId = itemsKeeper.finishPlacement(task.placementId!!).cellId
+
+        val product = storage.getApplication(task.applicationId!!).product()
+
+        val instructions = instructionsBuilder.buildInstructionsForPickup(
+            product.type,
+            product.customText,
+            cellId
+        )
+
+        return PickupTaskResponse(
+            taskId = task.taskId,
+            instructions = instructions
+        )
     }
 
     fun updateTaskStatus(

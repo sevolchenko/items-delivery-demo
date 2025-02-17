@@ -7,7 +7,7 @@ import ru.tbank.itemsdeliverydemo.operatorback.model.TaskType
 @Component
 class InstructionsBuilder {
 
-    fun buildInstructionsFor(
+    fun buildInstructionsForReservation(
         taskType: TaskType,
         productType: ProductType,
         customText: String?,
@@ -25,6 +25,23 @@ class InstructionsBuilder {
                 instructions.appendLine("Нажми ENTER")
             }
         }
+
+        return instructions.toString()
+    }
+
+    fun buildInstructionsForPickup(
+        productType: ProductType,
+        customText: String?,
+        cellId: String
+    ): String {
+        val instructions = StringBuilder()
+
+        instructions.appendLine("На полочке $cellId лежит предмет \"${productType.ruName.uppercase()}\"")
+        customText?.let {
+            instructions.appendLine("На предмете надпись: \"$customText\"")
+        }
+        instructions.appendLine("Выдай предмет человеку и скажи спасибо!")
+        instructions.appendLine("Нажми ENTER")
 
         return instructions.toString()
     }

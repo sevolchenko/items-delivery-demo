@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.itemskeeper.client.configuration.ItemsKeeperClientConfiguration
 import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.CreatePlacementResponse
+import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.FinishPlacementResponse
 import java.time.LocalDateTime
 
 @Service
@@ -20,7 +21,6 @@ class ItemsKeeperClientService(
         webClient
         conf
         productId
-        finishPlacement("")
 
         return CreatePlacementResponse(
             placementId = "PLACEMENT_ID",
@@ -31,7 +31,10 @@ class ItemsKeeperClientService(
 
     fun finishPlacement(
         placementId: String
-    ) {
-        listOf(placementId)
+    ): FinishPlacementResponse {
+        return FinishPlacementResponse(
+            placementId,
+            "CELL_ID"
+        )
     }
 }

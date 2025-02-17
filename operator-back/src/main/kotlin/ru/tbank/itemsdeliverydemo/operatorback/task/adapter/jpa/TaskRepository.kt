@@ -12,4 +12,6 @@ interface TaskRepository : JpaRepository<Task, Long> {
     fun findTaskByTaskId(taskId: String): Optional<Task>
 
     fun findTasksByStatus(status: TaskStatus): List<Task>
+
+    fun findTaskByPickupCode(pickupCode: String): Optional<Task>
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.common.ErrorResponse
+import ru.tbank.itemsdeliverydemo.operatorback.model.dto.PickupTaskRequest
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskRequest
 import ru.tbank.itemsdeliverydemo.operatorback.task.TaskService
 import ru.tbank.itemsdeliverydemo.operatorback.task.adapter.mapper.TaskMapper
@@ -34,11 +35,18 @@ class TaskController(
         return service.takeTask(body).toResponse("No pending tasks found")
     }
 
-    @PostMapping("/{id}/complete")
+    @PostMapping("/{id}/complete-handling")
     fun finishHandling(
         @PathVariable id: String
     ): ResponseEntity<*> {
         return service.finishHandling(id).toResponse { mapper.toTaskResponse(it) }
+    }
+
+    @PostMapping("/pickup")
+    fun pickupTask(
+        @RequestBody body: PickupTaskRequest
+    ): ResponseEntity<*> {
+        return service.pickupTask(body.pickupCode).toResponse("Wrong code")
     }
 
     private fun <T : Any> T?.toResponse(
