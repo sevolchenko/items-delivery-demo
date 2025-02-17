@@ -9,7 +9,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
-import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.KeeperStatus
+import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.PlacementStatus
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -28,5 +28,5 @@ data class Placement(
     var updatedAt: LocalDateTime? = null,
 
     @Enumerated(EnumType.STRING)
-    var status: KeeperStatus = KeeperStatus.FREE,
+    var status: PlacementStatus = PlacementStatus.FREE,
 )

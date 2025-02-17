@@ -1,10 +1,6 @@
 spring:
   application:
     name: items-keeper
-  datasource:
-    username: delivery-demo
-    password: admin
-    url: jdbc:postgresql://localhost:5433/delivery-demo
 
   jpa:
     database: postgresql

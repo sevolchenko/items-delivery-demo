@@ -1,6 +1,6 @@
 package ru.tbank.itemsdeliverydemo.itemskeeper.placement.model
 
-enum class KeeperStatus {
+enum class PlacementStatus {
     FREE,
     RESERVED,
     STORED,

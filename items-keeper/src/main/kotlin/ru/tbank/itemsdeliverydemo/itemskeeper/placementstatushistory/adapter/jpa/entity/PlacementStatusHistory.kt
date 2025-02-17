@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
-import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.KeeperStatus
+import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.PlacementStatus
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -23,5 +23,5 @@ data class PlacementStatusHistory(
 
     val timestamp: LocalDateTime = LocalDateTime.now(),
 
-    val newStatus: KeeperStatus? = null
+    val newStatus: PlacementStatus? = null
 )
