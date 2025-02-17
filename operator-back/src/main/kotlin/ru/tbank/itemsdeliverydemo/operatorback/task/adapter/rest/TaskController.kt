@@ -34,6 +34,13 @@ class TaskController(
         return service.takeTask(body).toResponse("No pending tasks found")
     }
 
+    @PostMapping("/{id}/complete")
+    fun finishHandling(
+        @PathVariable id: String
+    ): ResponseEntity<*> {
+        return service.finishHandling(id).toResponse { mapper.toTaskResponse(it) }
+    }
+
     private fun <T : Any> T?.toResponse(
         errorMsg: String = "No task found",
         mapping: (T) -> Any = { it }

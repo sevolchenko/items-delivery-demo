@@ -5,6 +5,7 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.client.ApplicationsStorage
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.product
 import ru.tbank.itemsdeliverydemo.itemskeeper.client.ItemsKeeperClientService
 import ru.tbank.itemsdeliverydemo.operatorback.component.InstructionsBuilder
+import ru.tbank.itemsdeliverydemo.operatorback.component.PickupCodeGenerator
 import ru.tbank.itemsdeliverydemo.operatorback.model.TaskStatus
 import ru.tbank.itemsdeliverydemo.operatorback.model.TaskType
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskRequest
@@ -20,6 +21,7 @@ class TaskService(
     private val repository: TaskRepository,
     private val statusUpdatedSender: TaskStatusUpdatedSender,
     private val instructionsBuilder: InstructionsBuilder,
+    private val pickupCodeGenerator: PickupCodeGenerator,
     private val itemsKeeper: ItemsKeeperClientService,
     private val storage: ApplicationsStorageClientService
 ) {
@@ -79,6 +81,18 @@ class TaskService(
         if (pendingTasks.isEmpty()) { return null }
 
         return pendingTasks.minBy { it.createdAt }
+    }
+
+    fun finishHandling(
+        taskId: String
+    ): Task? {
+        val task = getTask(taskId) ?: return null
+
+        if (task.status != TaskStatus.HANDLING) error("Task is not in handling state")
+
+        task.pickupCode = pickupCodeGenerator.generate()
+
+        return updateTaskStatus(task, TaskStatus.WAITING_FOR_PICKUP)
     }
 
     fun updateTaskStatus(
