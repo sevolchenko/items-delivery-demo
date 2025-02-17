@@ -12,3 +12,5 @@ create table application
 
     constraint application_pk primary key (id)
 );
+
+create index application_integration_id_idx on application (integration_id);

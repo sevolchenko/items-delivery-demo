@@ -16,3 +16,5 @@ create table product
     constraint product_fk_application foreign key (application_id) references application (id)
         on delete cascade
 );
+
+create index product_integration_id_application_id_idx on product (integration_id, application_id);
