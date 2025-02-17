@@ -4,9 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.itemskeeper.client.configuration.ItemsKeeperClientConfiguration
-import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.CreatePlacementResponse
-import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.FinishPlacementResponse
-import java.time.LocalDateTime
+import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.PlacementResponse
 
 @Service
 @ConditionalOnProperty(prefix = "service.items-controller", name = ["enabled"], havingValue = "true")
@@ -17,22 +15,21 @@ class ItemsKeeperClientService(
 
     fun placeProduct(
         productId: String
-    ): CreatePlacementResponse {
+    ): PlacementResponse {
         webClient
         conf
         productId
 
-        return CreatePlacementResponse(
+        return PlacementResponse(
             placementId = "PLACEMENT_ID",
-            cellId = "CELL_ID",
-            validUntil = LocalDateTime.now().plusDays(1)
+            cellId = "CELL_ID"
         )
     }
 
     fun finishPlacement(
         placementId: String
-    ): FinishPlacementResponse {
-        return FinishPlacementResponse(
+    ): PlacementResponse {
+        return PlacementResponse(
             placementId,
             "CELL_ID"
         )
