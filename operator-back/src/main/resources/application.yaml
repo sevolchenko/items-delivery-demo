@@ -11,3 +11,10 @@ spring:
   kafka:
     topics:
       task-status-updated: operator.task-status-updated-events
+
+service:
+  items-keeper:
+    enabled: true
+
+  applications-storage:
+    enabled: true

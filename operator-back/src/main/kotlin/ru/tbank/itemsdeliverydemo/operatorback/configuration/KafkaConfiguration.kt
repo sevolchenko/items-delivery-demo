@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.core.ProducerFactory
-import ru.tbank.itemsdeliverydemo.operatorback.configuration.properties.KafkaServers
+import ru.tbank.itemsdeliverydemo.common.streaming.properties.KafkaServers
 
 @Configuration
 class KafkaConfiguration {

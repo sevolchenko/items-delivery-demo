@@ -1,10 +1,10 @@
-package ru.tbank.itemsdeliverydemo.operatorback.mapper
+package ru.tbank.itemsdeliverydemo.operatorback.task.adapter.mapper
 
 import org.mapstruct.Mapper
-import ru.tbank.itemsdeliverydemo.operatorback.configuration.MapstructConfiguration
-import ru.tbank.itemsdeliverydemo.operatorback.streaming.TaskStatusUpdatedEvent
+import ru.tbank.itemsdeliverydemo.common.configuration.MapstructConfiguration
+import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TaskResponse
+import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TaskStatusUpdatedEvent
 import ru.tbank.itemsdeliverydemo.operatorback.task.adapter.jpa.entity.Task
-import ru.tbank.itemsdeliverydemo.operatorback.task.adapter.rest.dto.TaskResponse
 
 @Mapper(
     config = MapstructConfiguration::class

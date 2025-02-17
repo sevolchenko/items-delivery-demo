@@ -7,8 +7,8 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.operatorback.task.model.TaskStatus
-import ru.tbank.itemsdeliverydemo.operatorback.task.model.TaskType
+import ru.tbank.itemsdeliverydemo.operatorback.model.TaskStatus
+import ru.tbank.itemsdeliverydemo.operatorback.model.TaskType
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -32,6 +32,8 @@ data class Task(
 
     @Enumerated(EnumType.STRING)
     var status: TaskStatus = TaskStatus.WAITING_FOR_HANDLING,
+
+    var operatorId: String? = null,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime? = null

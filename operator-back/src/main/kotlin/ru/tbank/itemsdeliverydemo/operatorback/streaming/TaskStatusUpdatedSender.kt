@@ -1,10 +1,10 @@
 package ru.tbank.itemsdeliverydemo.operatorback.streaming
 
 import org.springframework.stereotype.Component
+import ru.tbank.itemsdeliverydemo.common.streaming.KafkaProducer
 import ru.tbank.itemsdeliverydemo.operatorback.configuration.properties.KafkaTopics
-import ru.tbank.itemsdeliverydemo.operatorback.mapper.TaskMapper
 import ru.tbank.itemsdeliverydemo.operatorback.task.adapter.jpa.entity.Task
-import ru.tbank.itemsdeliverydemo.operatorback.task.model.TaskStatus
+import ru.tbank.itemsdeliverydemo.operatorback.task.adapter.mapper.TaskMapper
 
 @Component
 class TaskStatusUpdatedSender(
@@ -22,10 +22,3 @@ class TaskStatusUpdatedSender(
         )
     }
 }
-
-data class TaskStatusUpdatedEvent(
-    val taskId: String,
-    val applicationId: String,
-    val status: TaskStatus,
-    val pickupCode: String? = null
-)

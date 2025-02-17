@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.operatorback.task.model
+package ru.tbank.itemsdeliverydemo.operatorback.model
 
 enum class TaskStatus {
     WAITING_FOR_HANDLING,
