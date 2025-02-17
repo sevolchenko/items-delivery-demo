@@ -16,7 +16,7 @@ data class Cell(
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID(),
 
-    val name: String = "Default",
+    val name: String? = "Default",
 
     @ManyToOne
     val cellDimensions: CellDimensions? = null
