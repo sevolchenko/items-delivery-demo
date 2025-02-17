@@ -49,6 +49,13 @@ class TaskController(
         return service.pickupTask(body.pickupCode).toResponse("Wrong code")
     }
 
+    @PostMapping("/{id}/finish")
+    fun finishPickup(
+        @PathVariable id: String
+    ): ResponseEntity<*> {
+        return service.finishPickup(id).toResponse { mapper.toTaskResponse(it) }
+    }
+
     private fun <T : Any> T?.toResponse(
         errorMsg: String = "No task found",
         mapping: (T) -> Any = { it }

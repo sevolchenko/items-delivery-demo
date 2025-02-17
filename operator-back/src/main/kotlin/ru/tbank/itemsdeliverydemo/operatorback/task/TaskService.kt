@@ -56,7 +56,7 @@ class TaskService(
 
         val product = storage.getApplication(task.applicationId!!).product()
 
-        val cellId = itemsKeeper.placeProduct(product.integrationId)
+        val cellId = itemsKeeper.placeProduct(product.itemNumber!!)
             .also {
                 task.placementId = it.placementId
             }.cellId
@@ -117,6 +117,16 @@ class TaskService(
             taskId = task.taskId,
             instructions = instructions
         )
+    }
+
+    fun finishPickup(
+        taskId: String
+    ): Task? {
+        val task = getTask(taskId) ?: return null
+
+        if (task.status != TaskStatus.WAITING_FOR_PICKUP) error("Task is not in waiting for pickup state")
+
+        return updateTaskStatus(task, TaskStatus.FINISHED)
     }
 
     fun updateTaskStatus(
