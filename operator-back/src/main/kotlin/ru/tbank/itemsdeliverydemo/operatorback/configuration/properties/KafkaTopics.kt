@@ -7,4 +7,5 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties("spring.kafka.topics")
 class KafkaTopics {
     lateinit var taskStatusUpdated: String
+    lateinit var startTaskHandling: String
 }
