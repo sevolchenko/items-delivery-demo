@@ -5,6 +5,4 @@ import org.springframework.stereotype.Repository
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
 
 @Repository
-interface CellRepository : JpaRepository<Cell, Long> {
-
-}
+interface CellRepository : JpaRepository<Cell, Long>

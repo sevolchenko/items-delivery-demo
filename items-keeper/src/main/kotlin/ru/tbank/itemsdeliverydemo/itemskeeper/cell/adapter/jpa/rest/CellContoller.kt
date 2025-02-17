@@ -12,16 +12,15 @@ import ru.tbank.itemsdeliverydemo.itemskeeper.cell.model.dto.CreateCellRequest
 @Tag(name = "cells")
 @RestController
 @RequestMapping("/api/v1/cells")
-class CellContoller (
+class CellContoller(
     private val cellService: CellService
-)
-{
+) {
     @PostMapping("/create")
     fun createCell(
         @RequestBody request: CreateCellRequest
     ): ResponseEntity<*> {
         val createdCellId = cellService.createCell(request.cellName, request.cellDimensions)
 
-        return ResponseEntity.ok().body(createdCellId);
+        return ResponseEntity.ok().body(createdCellId)
     }
 }

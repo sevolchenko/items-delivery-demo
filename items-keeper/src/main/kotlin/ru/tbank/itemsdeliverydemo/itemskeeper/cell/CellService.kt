@@ -7,16 +7,15 @@ import ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.entity.
 import java.util.UUID
 
 @Service
-class CellService (
+class CellService(
     private val cellRepository: CellRepository
 ) {
-    fun createCell (
+    fun createCell(
         name: String?,
         dimensions: CellDimensions
-    ) : UUID? {
+    ): UUID? {
         val cell = cellRepository.save(Cell(name = name, cellDimensions = dimensions))
 
         return cell.id
     }
-
 }
