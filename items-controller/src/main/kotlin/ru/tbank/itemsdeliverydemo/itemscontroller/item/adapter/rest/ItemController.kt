@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ErrorResponse
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ReserveItemRequest
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.rest.dto.ReserveItemResponse
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemRequest
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemResponse
 
 @Tag(name = "Items")
 @RestController

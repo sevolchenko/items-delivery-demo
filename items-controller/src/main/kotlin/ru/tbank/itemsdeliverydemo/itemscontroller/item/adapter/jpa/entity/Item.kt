@@ -7,7 +7,8 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.itemscontroller.item.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ItemStatus
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -18,7 +19,8 @@ data class Item(
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
 
-    val type: String = "Default",
+    @Enumerated(EnumType.STRING)
+    val type: ProductType? = null,
     val color: String? = null,
 
     @Enumerated(EnumType.STRING)

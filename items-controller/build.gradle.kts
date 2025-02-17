@@ -18,6 +18,8 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
 
+    implementation(project(":common"))
+
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("org.testcontainers:junit-jupiter")

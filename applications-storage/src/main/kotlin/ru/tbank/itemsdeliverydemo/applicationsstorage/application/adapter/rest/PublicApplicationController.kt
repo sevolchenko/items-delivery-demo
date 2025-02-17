@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.ApplicationService
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.CreateApplicationRequest
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.PublicApplicationResponse
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.rest.dto.PublicPickupCodeResponse
-import ru.tbank.itemsdeliverydemo.applicationsstorage.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.CreateApplicationRequest
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.PublicApplicationResponse
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.PublicPickupCodeResponse
+import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 
 @RestController
 @RequestMapping("/public/api/v1/applications")

@@ -1,7 +1,9 @@
 package ru.tbank.itemsdeliverydemo.applicationsstorage.component
 
 import org.springframework.stereotype.Component
-import ru.tbank.itemsdeliverydemo.applicationsstorage.configuration.properties.KafkaTopics
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.StartProcessingEvent
+import ru.tbank.itemsdeliverydemo.common.configuration.properties.KafkaTopics
+import ru.tbank.itemsdeliverydemo.common.streaming.KafkaProducer
 
 @Component
 class ProcessingStarter(
@@ -21,8 +23,3 @@ class ProcessingStarter(
         )
     }
 }
-
-data class StartProcessingEvent(
-    val event: String,
-    val applicationId: String
-)

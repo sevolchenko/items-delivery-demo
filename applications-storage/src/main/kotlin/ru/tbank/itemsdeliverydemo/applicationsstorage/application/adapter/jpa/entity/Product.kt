@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ProductType
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import java.time.LocalDateTime
 import java.util.UUID
 

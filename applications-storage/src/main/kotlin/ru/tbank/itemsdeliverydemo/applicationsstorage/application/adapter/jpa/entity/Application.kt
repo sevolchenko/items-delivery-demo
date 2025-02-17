@@ -10,7 +10,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
-import ru.tbank.itemsdeliverydemo.applicationsstorage.application.model.ApplicationStatus
+import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
 import java.time.LocalDateTime
 import java.util.UUID
 
