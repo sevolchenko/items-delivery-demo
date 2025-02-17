@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.applicationsstorage.configuration
+package ru.tbank.itemsdeliverydemo.operatorback.configuration
 
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringSerializer

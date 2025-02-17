@@ -1,0 +1,8 @@
+spring:
+    datasource:
+      username: delivery-demo
+      password: admin
+      url: jdbc:postgresql://localhost:5433/delivery-demo
+
+    kafka:
+      bootstrap-servers: localhost:9092

@@ -1,3 +1,21 @@
 spring:
   application:
     name: operator-back
+
+  jpa:
+    database: postgresql
+
+  liquibase:
+    change-log: migrations/master.xml
+
+  kafka:
+    topics:
+      task-status-updated: operator.task-status-updated-events
+      start-task-handling: operator.start-task-handling-events
+
+service:
+  items-keeper:
+    enabled: true
+
+  applications-storage:
+    enabled: true
