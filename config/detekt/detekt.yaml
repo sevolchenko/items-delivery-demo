@@ -19,6 +19,8 @@ style:
     active: false
   MayBeConst:
     active: false
+  LoopWithTooManyJumpStatements:
+    active: false
 formatting:
   MaximumLineLength:
     active: false
