@@ -1,0 +1,12 @@
+ spring:
+  application:
+    name: notification-center
+
+  kafka:
+    topics:
+      notification-center-input: notification-center.input
+
+service:
+  telegram:
+    enabled: true
+    api-key: ${TELEGRAM_API_KEY}
