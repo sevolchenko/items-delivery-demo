@@ -1,5 +1,6 @@
 package ru.tbank.itemsdeliverydemo.itemscontroller.item
 
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepository
@@ -8,6 +9,7 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.model.ItemStatus
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import java.time.LocalDateTime
 import java.util.UUID
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class ItemService(
@@ -26,6 +28,10 @@ class ItemService(
             updatedAt = LocalDateTime.now()
         }.id
     }
+
+    fun findItemByNumber(
+        itemNumber: String
+    ) = itemRepository.findById(itemNumber.toLong()).getOrNull()
 
     fun createItems(
         type: ProductType,

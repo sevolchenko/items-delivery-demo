@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.itemscontroller.client.configuration.ItemsControllerClientConfiguration
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ItemResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemRequest
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemResponse
 
@@ -22,6 +23,16 @@ class ItemsControllerClientService(
             .bodyValue(request)
             .retrieve()
             .bodyToMono(ReserveItemResponse::class.java)
+            .block()!!
+    }
+
+    fun findItemById(
+        itemNumber: String
+    ): ItemResponse {
+        return webClient.get()
+            .uri("${conf.host}/api/v1/$itemNumber")
+            .retrieve()
+            .bodyToMono(ItemResponse::class.java)
             .block()!!
     }
 }
