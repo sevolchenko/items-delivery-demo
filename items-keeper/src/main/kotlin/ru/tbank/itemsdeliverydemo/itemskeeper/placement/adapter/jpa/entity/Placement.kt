@@ -11,7 +11,6 @@ import jakarta.persistence.Table
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
 import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.PlacementStatus
 import java.time.LocalDateTime
-import java.util.UUID
 
 @Entity
 @Table(name = "placement")

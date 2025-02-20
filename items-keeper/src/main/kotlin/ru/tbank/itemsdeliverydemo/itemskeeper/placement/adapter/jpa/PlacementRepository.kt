@@ -8,6 +8,5 @@ import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.PlacementStatus
 @Repository
 interface PlacementRepository : JpaRepository<Placement, String> {
 
-    fun findAllByStatus(status: PlacementStatus) : List<Placement>
-
+    fun findAllByStatus(status: PlacementStatus): List<Placement>
 }

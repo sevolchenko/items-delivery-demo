@@ -1,7 +1,6 @@
 package ru.tbank.itemsdeliverydemo.itemskeeper.cell
 
 import org.springframework.stereotype.Service
-import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.CellRepository
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
 import ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.CellDimensionsRepository

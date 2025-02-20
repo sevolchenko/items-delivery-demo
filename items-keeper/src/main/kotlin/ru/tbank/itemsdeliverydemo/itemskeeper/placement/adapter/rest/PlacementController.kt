@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.tbank.itemsdeliverydemo.itemskeeper.cell.CellService
-import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.CreateCellsRequest
 import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.FinishPlacementRequest
 import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.PlaceProductRequest
 import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.PlacementResponse
@@ -24,7 +22,7 @@ class PlacementController(
         @RequestBody request: PlaceProductRequest
     ): ResponseEntity<*> {
         return placementService.placeProduct(request.productId).let {
-            PlacementResponse(placementId = it.id!!, cellId =  it.cell!!.id)
+            PlacementResponse(placementId = it.id!!, cellId = it.cell!!.id)
         }.let { ResponseEntity.ok().body(it) }
     }
 

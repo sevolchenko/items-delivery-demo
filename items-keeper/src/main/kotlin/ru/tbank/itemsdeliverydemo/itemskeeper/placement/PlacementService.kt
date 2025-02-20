@@ -7,7 +7,6 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.model.Size
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.CellRepository
 import ru.tbank.itemsdeliverydemo.itemskeeper.cell.adapter.jpa.entity.Cell
 import ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.entity.CellDimensions
-import ru.tbank.itemsdeliverydemo.itemskeeper.model.dto.PlacementResponse
 import ru.tbank.itemsdeliverydemo.itemskeeper.placement.adapter.jpa.PlacementRepository
 import ru.tbank.itemsdeliverydemo.itemskeeper.placement.adapter.jpa.entity.Placement
 import ru.tbank.itemsdeliverydemo.itemskeeper.placement.model.PlacementStatus
@@ -15,20 +14,21 @@ import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Service
-class PlacementService (
+class PlacementService(
     private val placementRepository: PlacementRepository,
-    private val cellRepository: CellRepository
+    private val cellRepository: CellRepository,
     private val itemsController: ItemsControllerClientService
 ) {
 
     fun placeProduct(
         productId: String
-    ) : Placement {
+    ): Placement {
         val productType = itemsController.findItemById(productId).type
         val cell = findFreeCell(productType)
 
         return placementRepository.save(
-            Placement(productId = productId, cell = cell))
+            Placement(productId = productId, cell = cell)
+        )
     }
 
     fun findFreeCell(productType: ProductType): Cell {
@@ -40,18 +40,18 @@ class PlacementService (
         }.minBy { square(it.cellDimensions!!) }
     }
 
-    private fun square(dim: CellDimensions) : Double {
+    private fun square(dim: CellDimensions): Double {
         return dim.length * dim.width
     }
 
     private fun canFit(dim: CellDimensions, product: Size): Boolean {
         return (product.length <= dim.length && product.width <= dim.width) ||
-                (product.length <= dim.width && product.width <= dim.length)
+            (product.length <= dim.width && product.width <= dim.length)
     }
 
     fun finishPlacement(
         placementId: String
-    ) : Placement? {
+    ): Placement? {
         return placementRepository.findById(placementId).getOrNull()?.apply {
             status = PlacementStatus.COMPLETED
             updatedAt = LocalDateTime.now()
