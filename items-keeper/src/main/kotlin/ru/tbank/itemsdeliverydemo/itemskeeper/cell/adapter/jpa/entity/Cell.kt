@@ -13,8 +13,8 @@ import java.util.UUID
 @Table(name = "cell")
 data class Cell(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID = UUID.randomUUID(),
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: String = UUID.randomUUID().toString(),
 
     val name: String? = "Default",
 

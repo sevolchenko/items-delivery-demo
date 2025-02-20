@@ -13,5 +13,5 @@ enum class ProductType(
 data class Size(
     val width: Double,
     val height: Double,
-    val depth: Double
+    val length: Double
 )

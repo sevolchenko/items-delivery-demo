@@ -11,8 +11,8 @@ import java.util.UUID
 @Table(name = "cell_dimensions")
 data class CellDimensions(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: String? = null,
 
     val length: Double = 1.0,
     val height: Double = 1.0,
