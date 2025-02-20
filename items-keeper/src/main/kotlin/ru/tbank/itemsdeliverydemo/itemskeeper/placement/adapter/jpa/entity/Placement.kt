@@ -17,9 +17,9 @@ import java.util.UUID
 @Table(name = "placement")
 data class Placement(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
-    val productId: UUID? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: String? = null,
+    val productId: String? = null,
 
     @ManyToOne
     val cell: Cell? = null,
@@ -28,5 +28,5 @@ data class Placement(
     var updatedAt: LocalDateTime? = null,
 
     @Enumerated(EnumType.STRING)
-    var status: PlacementStatus = PlacementStatus.FREE,
+    var status: PlacementStatus = PlacementStatus.BUSY,
 )
