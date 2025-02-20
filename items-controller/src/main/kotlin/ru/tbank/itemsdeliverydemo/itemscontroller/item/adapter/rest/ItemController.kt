@@ -8,12 +8,15 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
+import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ItemResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemRequest
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemResponse
 
@@ -55,9 +58,27 @@ class ItemController(
         @RequestBody request: ReserveItemRequest
     ): ResponseEntity<*> {
         val reservedItemId = itemService.reserveItem(request.type, request.color)
-            ?: return ResponseEntity
-                .status(HttpStatus.NOT_FOUND).body(ErrorResponse("No available item found"))
+            ?: return notFound()
 
         return ResponseEntity.ok().body(ReserveItemResponse(reservedItemId))
     }
+
+    @GetMapping("/{id}")
+    fun findById(
+        @PathVariable id: String
+    ): ResponseEntity<*> {
+        return itemService.findItemByNumber(id)?.let {
+            ResponseEntity.ok(
+                ItemResponse(
+                    id = it.id!!.toString(),
+                    type = it.type!!,
+                    color = it.color,
+                    status = it.status
+                )
+            )
+        } ?: notFound()
+    }
+
+    private fun notFound() = ResponseEntity
+        .status(HttpStatus.NOT_FOUND).body(ErrorResponse("No available item found"))
 }
