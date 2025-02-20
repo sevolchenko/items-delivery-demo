@@ -18,7 +18,6 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.en
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.CreateApplicationRequest
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.PublicApplicationResponse
-import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.PublicPickupCodeResponse
 import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 
 @RestController
@@ -80,44 +79,6 @@ class PublicApplicationController(
         @PathVariable id: String
     ): ResponseEntity<*> {
         return service.getApplication(id).toResponse()
-    }
-
-    @Operation(
-        summary = "Получить код для получения заказа",
-        responses = [
-            ApiResponse(
-                responseCode = "200",
-                description = "Код для получения заказа успешно получен",
-                content = [
-                    Content(
-                        schema = Schema(implementation = PublicPickupCodeResponse::class),
-                        mediaType = MediaType.APPLICATION_JSON_VALUE
-                    )
-                ]
-            ),
-            ApiResponse(
-                responseCode = "404",
-                description = "Заявка не найдена",
-                content = [
-                    Content(
-                        schema = Schema(implementation = ErrorResponse::class),
-                        mediaType = MediaType.APPLICATION_JSON_VALUE
-                    )
-                ]
-            )
-        ]
-    )
-    @GetMapping("/{id}/pickup-code")
-    fun getPickupCode(
-        @PathVariable id: String
-    ): ResponseEntity<*> {
-        val application = service.getApplication(id)
-
-        return if (application == null) {
-            null.toResponse()
-        } else {
-            ResponseEntity.ok(PublicPickupCodeResponse(application.pickupCode))
-        }
     }
 
     private fun Application?.toResponse(): ResponseEntity<*> {

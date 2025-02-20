@@ -23,7 +23,7 @@ data class Application(
 
     val integrationId: String = UUID.randomUUID().toString(),
 
-    var pickupCode: String? = null,
+    val clientId: Long? = null,
 
     @Enumerated(EnumType.STRING)
     var status: ApplicationStatus = ApplicationStatus.CREATED,

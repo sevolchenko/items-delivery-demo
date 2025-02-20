@@ -30,7 +30,10 @@ class ApplicationService(
             customText = request.customText
         )
 
-        val application = Application(products = listOf(product))
+        val application = Application(
+            clientId = request.clientId,
+            products = listOf(product)
+        )
 
         return repository.save(application).also {
             processingStarter.startProcessing(it.integrationId)
@@ -43,16 +46,6 @@ class ApplicationService(
     ): Application? {
         return getApplication(integrationId)?.apply {
             this.status = status
-            updatedAt = LocalDateTime.now()
-        }
-    }
-
-    fun updateApplication(
-        integrationId: String,
-        pickupCode: String
-    ): Application? {
-        return getApplication(integrationId)?.apply {
-            this.pickupCode = pickupCode
             updatedAt = LocalDateTime.now()
         }
     }

@@ -37,14 +37,6 @@ class ApplicationController(
         return service.updateApplicationStatus(id, status).toResponse()
     }
 
-    @PutMapping("/{id}")
-    fun updateApplication(
-        @PathVariable id: String,
-        @RequestParam pickupCode: String,
-    ): ResponseEntity<*> {
-        return service.updateApplication(id, pickupCode).toResponse()
-    }
-
     @PutMapping("/{id}/products/{productId}")
     fun updateProduct(
         @PathVariable id: String,

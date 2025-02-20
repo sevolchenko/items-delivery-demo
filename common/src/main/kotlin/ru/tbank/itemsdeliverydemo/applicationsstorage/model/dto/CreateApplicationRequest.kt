@@ -7,5 +7,7 @@ data class CreateApplicationRequest(
     val productType: ProductType,
 
     @Length(max = 20)
-    val customText: String? = null
+    val customText: String? = null,
+
+    val clientId: Long
 )
