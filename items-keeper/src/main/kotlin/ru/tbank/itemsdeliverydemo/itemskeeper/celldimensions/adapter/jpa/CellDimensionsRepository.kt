@@ -6,7 +6,7 @@ import ru.tbank.itemsdeliverydemo.itemskeeper.celldimensions.adapter.jpa.entity.
 import java.util.Optional
 
 @Repository
-interface CellDimensionsRepository : JpaRepository<CellDimensions, Long> {
+interface CellDimensionsRepository : JpaRepository<CellDimensions, String> {
 
     fun findByLengthAndHeightAndWidth(length: Double, height: Double, width: Double): Optional<CellDimensions>
 }
