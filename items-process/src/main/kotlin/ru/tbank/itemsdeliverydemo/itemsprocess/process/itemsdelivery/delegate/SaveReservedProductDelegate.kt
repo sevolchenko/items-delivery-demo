@@ -12,7 +12,7 @@ import ru.tbank.itemsdeliverydemo.itemsprocess.process.itemsdelivery.common.RESE
 @Component
 class SaveReservedProductDelegate(
     private val storage: ApplicationsStorageClientService
-): KotlinDelegate() {
+) : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
         storage.updateProduct(
             context[APPLICATION_ID],

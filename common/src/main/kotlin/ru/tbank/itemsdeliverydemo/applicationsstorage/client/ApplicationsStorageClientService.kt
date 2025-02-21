@@ -3,11 +3,9 @@ package ru.tbank.itemsdeliverydemo.applicationsstorage.client
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.util.UriComponentsBuilder
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.configuration.ApplicationsStorageClientConfiguration
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.ApplicationResponse
-import java.net.URI
 
 @Service
 @ConditionalOnProperty(prefix = "service.applications-storage", name = ["enabled"], havingValue = "true")
@@ -31,11 +29,11 @@ class ApplicationsStorageClientService(
         status: ApplicationStatus
     ) {
         webClient.patch()
-           .uri("${conf.host}/api/v1/applications/$applicationId/status")
-           .bodyValue(status)
-           .retrieve()
-           .bodyToMono(Void::class.java)
-           .block()
+            .uri("${conf.host}/api/v1/applications/$applicationId/status")
+            .bodyValue(status)
+            .retrieve()
+            .bodyToMono(Void::class.java)
+            .block()
     }
 
     fun updateProduct(

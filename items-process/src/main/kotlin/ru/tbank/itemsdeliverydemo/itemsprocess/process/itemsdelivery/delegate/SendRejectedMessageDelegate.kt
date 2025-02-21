@@ -10,7 +10,7 @@ import ru.tbank.itemsdeliverydemo.itemsprocess.process.itemsdelivery.component.N
 @Component
 class SendRejectedMessageDelegate(
     private val notificationSender: NotificationSender
-): KotlinDelegate() {
+) : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
         notificationSender.sendApplicationCancelled(
             context[APPLICATION_ID]

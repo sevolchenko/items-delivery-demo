@@ -40,7 +40,7 @@ class OperatorTaskStatusUpdatedEventListener(
 
     private fun messageFromStatus(
         status: TaskStatus
-    ) = when(status) {
+    ) = when (status) {
         TaskStatus.WAITING_FOR_HANDLING -> WAIT_TASK_CREATION_MESSAGE
         TaskStatus.HANDLING -> WAIT_TASK_HANDLING_MESSAGE
         TaskStatus.WAITING_FOR_PICKUP -> WAIT_READY_TO_PICKUP_MESSAGE

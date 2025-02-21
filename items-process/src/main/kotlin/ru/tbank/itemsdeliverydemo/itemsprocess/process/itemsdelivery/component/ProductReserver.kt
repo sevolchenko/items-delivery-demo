@@ -14,7 +14,7 @@ class ProductReserver(
 
     fun reserveProduct(
         applicationId: String
-    ): ProductReservationResult{
+    ): ProductReservationResult {
         val application = storage.getApplication(applicationId)
 
         val product = application.product()

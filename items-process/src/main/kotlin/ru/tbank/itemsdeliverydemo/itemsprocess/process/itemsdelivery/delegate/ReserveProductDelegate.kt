@@ -13,7 +13,7 @@ import ru.tbank.itemsdeliverydemo.itemsprocess.process.itemsdelivery.component.P
 @Component
 class ReserveProductDelegate(
     private val productReserver: ProductReserver
-): KotlinDelegate() {
+) : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
         val applicationId = context[APPLICATION_ID]
 

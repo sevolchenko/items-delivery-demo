@@ -11,7 +11,7 @@ import ru.tbank.itemsdeliverydemo.itemsprocess.process.itemsdelivery.component.N
 @Component
 class SendReadyToPickupMessageDelegate(
     private val notificationSender: NotificationSender
-): KotlinDelegate() {
+) : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
         notificationSender.sendApplicationReadyToReceive(
             context[APPLICATION_ID],

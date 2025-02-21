@@ -45,5 +45,4 @@ class NotificationSender(
     private fun getClientId(
         applicationId: String
     ) = storage.getApplication(applicationId).clientId
-
 }

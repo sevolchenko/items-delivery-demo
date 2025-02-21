@@ -10,7 +10,6 @@ import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator
 import org.camunda.bpm.spring.boot.starter.rest.CamundaJerseyResourceConfig
 import org.springframework.stereotype.Component
 
-
 @Component
 @ApplicationPath("/rest")
 class JerseyConfiguration : CamundaJerseyResourceConfig() {

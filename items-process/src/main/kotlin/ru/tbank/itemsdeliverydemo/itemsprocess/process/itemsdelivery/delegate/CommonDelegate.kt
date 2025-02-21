@@ -5,8 +5,7 @@ import org.springframework.stereotype.Component
 import ru.tbank.itemsdeliverydemo.itemsprocess.common.KotlinDelegate
 
 @Component
-class CommonDelegate: KotlinDelegate() {
+class CommonDelegate : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
-
     }
 }

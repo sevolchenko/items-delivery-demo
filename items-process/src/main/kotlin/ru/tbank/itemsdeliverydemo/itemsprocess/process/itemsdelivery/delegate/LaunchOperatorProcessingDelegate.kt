@@ -10,7 +10,7 @@ import ru.tbank.itemsdeliverydemo.itemsprocess.process.itemsdelivery.component.O
 @Component
 class LaunchOperatorProcessingDelegate(
     private val launcher: OperatorProcessingLauncher
-): KotlinDelegate() {
+) : KotlinDelegate() {
     override fun doExecute(context: DelegateExecution) {
         launcher.launch(
             context[APPLICATION_ID]

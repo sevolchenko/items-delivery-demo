@@ -14,8 +14,12 @@ repositories {
 
 dependencies {
     implementation(platform("org.camunda.bpm:camunda-bom:7.21.0"))
-    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest")
-    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp")
+    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest") {
+        exclude(group = "com.sun.xml.bind", module = "jaxb-core")
+    }
+    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp") {
+        exclude(group = "com.sun.xml.bind", module = "jaxb-core")
+    }
     implementation("org.camunda.spin:camunda-spin-dataformat-json-jackson")
     implementation("org.camunda.bpm:camunda-engine-plugin-spin")
     implementation("org.camunda.spin:camunda-spin-dataformat-all")
