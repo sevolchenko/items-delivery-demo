@@ -3,7 +3,7 @@ spring:
   datasource:
     username: delivery-demo
     password: password
-    url: jdbc:postgresql://localhost:5433/items-process
+    url: jdbc:postgresql://localhost:5432/items-process
 
   kafka:
     bootstrap-servers: localhost:9092
