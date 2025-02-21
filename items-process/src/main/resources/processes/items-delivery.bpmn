@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1kf5gh1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <bpmn:collaboration id="Collaboration_1961pim">
+    <bpmn:participant id="items-delivery-shell" name="Процесс доставки продукта" processRef="items-delivery" />
+    <bpmn:participant id="Participant_0cqom6j" name="Сервис операторов" />
+    <bpmn:participant id="Participant_0xwook1" name="Центр нотификаций" />
+    <bpmn:participant id="Participant_1d2bmpm" name="Центр нотификаций" />
+    <bpmn:messageFlow id="Flow_0z05ixe" sourceRef="launchOperatorProcessingTask" targetRef="Participant_0cqom6j" />
+    <bpmn:messageFlow id="Flow_073h10f" sourceRef="Participant_0cqom6j" targetRef="waitTaskCreationMessage" />
+    <bpmn:messageFlow id="Flow_1wde37t" sourceRef="Participant_0cqom6j" targetRef="waitTaskHandlingMessage" />
+    <bpmn:messageFlow id="Flow_16j7did" sourceRef="Participant_0cqom6j" targetRef="waitReadyToPickupMessage" />
+    <bpmn:messageFlow id="Flow_1af8v0q" sourceRef="Participant_0cqom6j" targetRef="waitPickupMessage" />
+    <bpmn:messageFlow id="Flow_0ikxafr" sourceRef="sendRejectedMessageTask" targetRef="Participant_0xwook1" />
+    <bpmn:messageFlow id="Flow_1kb6kxz" sourceRef="sendReadyToPickupMessageTask" targetRef="Participant_1d2bmpm" />
+  </bpmn:collaboration>
+  <bpmn:process id="items-delivery" name="Процесс доставки продукта" isExecutable="true" camunda:historyTimeToLive="P90D">
+    <bpmn:startEvent id="StartEvent_1" name="Старт процесса">
+      <bpmn:outgoing>Flow_0ucjo7e</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="reserveProductTask" name="Зарезервировать продукт" camunda:asyncBefore="true" camunda:delegateExpression="${reserveProductDelegate}">
+      <bpmn:incoming>Flow_0ucjo7e</bpmn:incoming>
+      <bpmn:outgoing>Flow_023fwbx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_1x99z2q" name="Удалось зарезервировать продукт?" default="Flow_00ynn6x">
+      <bpmn:incoming>Flow_023fwbx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y6n1w1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_00ynn6x</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="saveReservedProductTask" name="Сохранить информацию о продукте" camunda:asyncBefore="true" camunda:delegateExpression="${saveReservedProductDelegate}">
+      <bpmn:incoming>Flow_00ynn6x</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qgkmyi</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="setApplicationStatusReservedTask" name="Изменить статус заявки на &#34;Зарезервирован&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusReservedDelegate}">
+      <bpmn:incoming>Flow_0qgkmyi</bpmn:incoming>
+      <bpmn:outgoing>Flow_14fe34g</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="launchOperatorProcessingTask" name="Запустить процесс обработки оператором" camunda:asyncBefore="true" camunda:delegateExpression="${launchOperatorProcessingDelegate}">
+      <bpmn:incoming>Flow_14fe34g</bpmn:incoming>
+      <bpmn:outgoing>Flow_07ewo5q</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:intermediateCatchEvent id="waitTaskCreationMessage" name="Ожидание создания задания" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_07ewo5q</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uqk8bn</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0zp5rln" messageRef="Message_2sukos9" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="setApplicationStatusAwatingForTakeTask" name="Изменить статус заявки на &#34;Ожидает обработки оператором&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusAwatingForTakeDelegate}">
+      <bpmn:incoming>Flow_0uqk8bn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o5mx8v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="waitTaskHandlingMessage" name="Ожидание взятия в работу" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1o5mx8v</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pwtmzj</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1ffb77u" messageRef="Message_20o6i2d" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="setApplicationStatusHandlingByOperatorTask" name="Изменить статус заявки на &#34;Обрабатывается оператором&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusHandlingByOperatorDelegate}">
+      <bpmn:incoming>Flow_1pwtmzj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kj0pav</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="waitReadyToPickupMessage" name="Ожидание окончания сборки заказа" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1kj0pav</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lek2xm</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0bycs50" messageRef="Message_22dn7pd" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sendTask id="sendReadyToPickupMessageTask" name="Отправить клиенту сообщение о готовности" camunda:asyncBefore="true" camunda:delegateExpression="${sendReadyToPickupMessageDelegate}">
+      <bpmn:incoming>Flow_10zcp8e</bpmn:incoming>
+      <bpmn:outgoing>Flow_1q6cosy</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="setApplicationStatusReadyToPickupTask" name="Изменить статус заявки на &#34;Готово к получению&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusReadyToPickupDelegate}">
+      <bpmn:incoming>Flow_0lek2xm</bpmn:incoming>
+      <bpmn:outgoing>Flow_10zcp8e</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="waitPickupMessage" name="Ожидание выдачи товара" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_1q6cosy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xpijxi</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1m8hice" messageRef="Message_3l922q6" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0ucjo7e" sourceRef="StartEvent_1" targetRef="reserveProductTask" />
+    <bpmn:sequenceFlow id="Flow_023fwbx" sourceRef="reserveProductTask" targetRef="Gateway_1x99z2q" />
+    <bpmn:sequenceFlow id="Flow_0y6n1w1" sourceRef="Gateway_1x99z2q" targetRef="setApplicationStatusRejectedTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!execution.hasVariable("reservedItemId")}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_00ynn6x" sourceRef="Gateway_1x99z2q" targetRef="saveReservedProductTask" />
+    <bpmn:sequenceFlow id="Flow_0qgkmyi" sourceRef="saveReservedProductTask" targetRef="setApplicationStatusReservedTask" />
+    <bpmn:sequenceFlow id="Flow_14fe34g" sourceRef="setApplicationStatusReservedTask" targetRef="launchOperatorProcessingTask" />
+    <bpmn:sequenceFlow id="Flow_07ewo5q" sourceRef="launchOperatorProcessingTask" targetRef="waitTaskCreationMessage" />
+    <bpmn:sequenceFlow id="Flow_0uqk8bn" sourceRef="waitTaskCreationMessage" targetRef="setApplicationStatusAwatingForTakeTask" />
+    <bpmn:sequenceFlow id="Flow_1o5mx8v" sourceRef="setApplicationStatusAwatingForTakeTask" targetRef="waitTaskHandlingMessage" />
+    <bpmn:sequenceFlow id="Flow_1pwtmzj" sourceRef="waitTaskHandlingMessage" targetRef="setApplicationStatusHandlingByOperatorTask" />
+    <bpmn:sequenceFlow id="Flow_1kj0pav" sourceRef="setApplicationStatusHandlingByOperatorTask" targetRef="waitReadyToPickupMessage" />
+    <bpmn:sequenceFlow id="Flow_0lek2xm" sourceRef="waitReadyToPickupMessage" targetRef="setApplicationStatusReadyToPickupTask" />
+    <bpmn:sequenceFlow id="Flow_10zcp8e" sourceRef="setApplicationStatusReadyToPickupTask" targetRef="sendReadyToPickupMessageTask" />
+    <bpmn:sequenceFlow id="Flow_1q6cosy" sourceRef="sendReadyToPickupMessageTask" targetRef="waitPickupMessage" />
+    <bpmn:sequenceFlow id="Flow_0xpijxi" sourceRef="waitPickupMessage" targetRef="setApplicationStatusClosedTask" />
+    <bpmn:sequenceFlow id="Flow_1s10bij" sourceRef="setApplicationStatusClosedTask" targetRef="Event_1d1xiw7" />
+    <bpmn:sequenceFlow id="Flow_0iegzhk" sourceRef="sendRejectedMessageTask" targetRef="Event_1rmaoho" />
+    <bpmn:sequenceFlow id="Flow_1gp9ekg" sourceRef="setApplicationStatusRejectedTask" targetRef="sendRejectedMessageTask" />
+    <bpmn:serviceTask id="setApplicationStatusClosedTask" name="Изменить статус заявки на &#34;Завершена&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusClosedDelegate}">
+      <bpmn:incoming>Flow_0xpijxi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1s10bij</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1d1xiw7" name="Успешное завершение">
+      <bpmn:incoming>Flow_1s10bij</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="sendRejectedMessageTask" name="Отправить нотификацию об отмене заказа" camunda:asyncBefore="true" camunda:delegateExpression="${sendRejectedMessageDelegate}">
+      <bpmn:incoming>Flow_1gp9ekg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iegzhk</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_1rmaoho">
+      <bpmn:incoming>Flow_0iegzhk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="setApplicationStatusRejectedTask" name="Установить статус заявки &#34;Отменено&#34;" camunda:asyncBefore="true" camunda:delegateExpression="${setApplicationStatusRejectedDelegate}">
+      <bpmn:incoming>Flow_0y6n1w1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gp9ekg</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_2sukos9" name="waitTaskCreationMessage" />
+  <bpmn:message id="Message_20o6i2d" name="waitTaskHandlingMessage" />
+  <bpmn:message id="Message_22dn7pd" name="waitReadyToPickupMessage" />
+  <bpmn:message id="Message_3l922q6" name="waitPickupMessage" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1961pim">
+      <bpmndi:BPMNShape id="Participant_0ysbksu_di" bpmnElement="items-delivery-shell" isHorizontal="true">
+        <dc:Bounds x="160" y="210" width="2830" height="480" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="242" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="220" y="535" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03x73oj_di" bpmnElement="reserveProductTask">
+        <dc:Bounds x="390" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1x99z2q_di" bpmnElement="Gateway_1x99z2q" isMarkerVisible="true">
+        <dc:Bounds x="585" y="485" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="569" y="542" width="87" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0ft12ta" bpmnElement="saveReservedProductTask">
+        <dc:Bounds x="720" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0qif7et" bpmnElement="setApplicationStatusReservedTask" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="890" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qz28v6_di" bpmnElement="launchOperatorProcessingTask">
+        <dc:Bounds x="1060" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yh4pbx_di" bpmnElement="waitTaskCreationMessage">
+        <dc:Bounds x="1262" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1251" y="440" width="53" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1f4nw6a" bpmnElement="setApplicationStatusAwatingForTakeTask" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1400" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_19tmkc6" bpmnElement="waitTaskHandlingMessage">
+        <dc:Bounds x="1602" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1573" y="446" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_11akzbo" bpmnElement="setApplicationStatusHandlingByOperatorTask" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1760" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0twjsrw" bpmnElement="waitReadyToPickupMessage">
+        <dc:Bounds x="1972" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1952" y="446" width="72" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bb2apo_di" bpmnElement="sendReadyToPickupMessageTask">
+        <dc:Bounds x="2320" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0u2w44b" bpmnElement="setApplicationStatusReadyToPickupTask" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="2120" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0pcqjr8" bpmnElement="waitPickupMessage">
+        <dc:Bounds x="2522" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2500" y="446" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1cxhjk0" bpmnElement="setApplicationStatusClosedTask" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="2660" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d1xiw7_di" bpmnElement="Event_1d1xiw7">
+        <dc:Bounds x="2852" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2840" y="535" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09y2cet_di" bpmnElement="sendRejectedMessageTask">
+        <dc:Bounds x="890" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rmaoho_di" bpmnElement="Event_1rmaoho">
+        <dc:Bounds x="1092" y="332" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_03zvftr" bpmnElement="setApplicationStatusRejectedTask" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="720" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ucjo7e_di" bpmnElement="Flow_0ucjo7e">
+        <di:waypoint x="278" y="510" />
+        <di:waypoint x="390" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_023fwbx_di" bpmnElement="Flow_023fwbx">
+        <di:waypoint x="490" y="510" />
+        <di:waypoint x="585" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y6n1w1_di" bpmnElement="Flow_0y6n1w1">
+        <di:waypoint x="610" y="485" />
+        <di:waypoint x="610" y="350" />
+        <di:waypoint x="720" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00ynn6x_di" bpmnElement="Flow_00ynn6x">
+        <di:waypoint x="635" y="510" />
+        <di:waypoint x="720" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qgkmyi_di" bpmnElement="Flow_0qgkmyi">
+        <di:waypoint x="820" y="510" />
+        <di:waypoint x="890" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14fe34g_di" bpmnElement="Flow_14fe34g">
+        <di:waypoint x="990" y="510" />
+        <di:waypoint x="1060" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07ewo5q_di" bpmnElement="Flow_07ewo5q">
+        <di:waypoint x="1160" y="510" />
+        <di:waypoint x="1262" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uqk8bn_di" bpmnElement="Flow_0uqk8bn">
+        <di:waypoint x="1298" y="510" />
+        <di:waypoint x="1400" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o5mx8v_di" bpmnElement="Flow_1o5mx8v">
+        <di:waypoint x="1500" y="510" />
+        <di:waypoint x="1602" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pwtmzj_di" bpmnElement="Flow_1pwtmzj">
+        <di:waypoint x="1638" y="510" />
+        <di:waypoint x="1760" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kj0pav_di" bpmnElement="Flow_1kj0pav">
+        <di:waypoint x="1860" y="510" />
+        <di:waypoint x="1972" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lek2xm_di" bpmnElement="Flow_0lek2xm">
+        <di:waypoint x="2008" y="510" />
+        <di:waypoint x="2120" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10zcp8e_di" bpmnElement="Flow_10zcp8e">
+        <di:waypoint x="2220" y="510" />
+        <di:waypoint x="2320" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q6cosy_di" bpmnElement="Flow_1q6cosy">
+        <di:waypoint x="2420" y="510" />
+        <di:waypoint x="2522" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xpijxi_di" bpmnElement="Flow_0xpijxi">
+        <di:waypoint x="2558" y="510" />
+        <di:waypoint x="2660" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s10bij_di" bpmnElement="Flow_1s10bij">
+        <di:waypoint x="2760" y="510" />
+        <di:waypoint x="2852" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iegzhk_di" bpmnElement="Flow_0iegzhk">
+        <di:waypoint x="990" y="350" />
+        <di:waypoint x="1092" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gp9ekg_di" bpmnElement="Flow_1gp9ekg">
+        <di:waypoint x="820" y="350" />
+        <di:waypoint x="890" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_19za1qa_di" bpmnElement="Participant_0cqom6j" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1060" y="790" width="1590" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ygw92b" bpmnElement="Participant_0xwook1" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="790" y="90" width="300" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1hp5vry" bpmnElement="Participant_1d2bmpm" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="2220" y="100" width="300" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0z05ixe_di" bpmnElement="Flow_0z05ixe">
+        <di:waypoint x="1110" y="550" />
+        <di:waypoint x="1110" y="790" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_073h10f_di" bpmnElement="Flow_073h10f">
+        <di:waypoint x="1280" y="790" />
+        <di:waypoint x="1280" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wde37t_di" bpmnElement="Flow_1wde37t">
+        <di:waypoint x="1620" y="790" />
+        <di:waypoint x="1620" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16j7did_di" bpmnElement="Flow_16j7did">
+        <di:waypoint x="1990" y="790" />
+        <di:waypoint x="1990" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kb6kxz_di" bpmnElement="Flow_1kb6kxz">
+        <di:waypoint x="2370" y="470" />
+        <di:waypoint x="2370" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1af8v0q_di" bpmnElement="Flow_1af8v0q">
+        <di:waypoint x="2540" y="790" />
+        <di:waypoint x="2540" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ikxafr_di" bpmnElement="Flow_0ikxafr">
+        <di:waypoint x="940" y="310" />
+        <di:waypoint x="940" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -16,7 +16,7 @@ class ItemsControllerClientService(
     private val conf: ItemsControllerClientConfiguration,
 ) {
 
-    fun reserveItem(type: ProductType, color: String?): ReserveItemResponse {
+    fun reserveItem(type: ProductType, color: String? = null): ReserveItemResponse {
         val request = ReserveItemRequest(type, color)
         return webClient.post()
             .uri("${conf.host}/api/v1/items/reserve")
