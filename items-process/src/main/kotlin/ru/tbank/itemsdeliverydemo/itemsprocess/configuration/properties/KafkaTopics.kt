@@ -9,4 +9,5 @@ class KafkaTopics {
     lateinit var taskStatusUpdated: String
     lateinit var startTaskHandling: String
     lateinit var notificationCenterInput: String
+    lateinit var startProcessing: String
 }
