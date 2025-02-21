@@ -8,3 +8,10 @@ spring:
       start-task-handling: operator.start-task-handling-events
       notification-center-input: notification-center.input
       start-processing: process.start-processing
+
+service:
+  applications-storage:
+    enabled: true
+
+  items-controller:
+    enabled: true
