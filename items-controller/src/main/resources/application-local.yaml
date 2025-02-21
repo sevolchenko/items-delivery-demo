@@ -2,4 +2,4 @@ spring:
     datasource:
       username: delivery-demo
       password: password
-      url: jdbc:postgresql://localhost:5432/items-controller
+      url: jdbc:postgresql://postgresql:5432/items-controller

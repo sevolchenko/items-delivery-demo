@@ -2,7 +2,14 @@ spring:
     datasource:
       username: delivery-demo
       password: password
-      url: jdbc:postgresql://localhost:5432/operator-back
+      url: jdbc:postgresql://postgresql:5432/operator-back
 
     kafka:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: kafka:9092
+
+service:
+  items-keeper:
+    host: http://localhost/items-keeper
+
+  applications-storage:
+    host: http://localhost/applications-storage
