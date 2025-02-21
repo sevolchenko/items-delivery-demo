@@ -1,3 +1,9 @@
 spring:
   application:
     name: items-process
+
+  kafka:
+    topics:
+      task-status-updated: operator.task-status-updated-events
+      start-task-handling: operator.start-task-handling-events
+      notification-center-input: notification-center.input
