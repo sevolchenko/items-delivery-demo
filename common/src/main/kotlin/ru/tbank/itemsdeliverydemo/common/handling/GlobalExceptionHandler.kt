@@ -1,5 +1,6 @@
 package ru.tbank.itemsdeliverydemo.common.handling
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -12,7 +13,16 @@ import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 @RestControllerAdvice
 @Suppress("UnusedParameter")
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
+    @ExceptionHandler(Exception::class)
+    fun handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(ErrorResponse("Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+}
 
+@RestControllerAdvice
+@Suppress("UnusedParameter")
+@ConditionalOnMissingBean(ResponseEntityExceptionHandler::class)
+class MethodArgumentNotValidExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(
         ex: MethodArgumentNotValidException,
@@ -24,10 +34,5 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         val msg = "Validation failed" + errors.joinToString(", ")
 
         return ResponseEntity(ErrorResponse(msg), HttpStatus.BAD_REQUEST)
-    }
-
-    @ExceptionHandler(Exception::class)
-    fun handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse("Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }
