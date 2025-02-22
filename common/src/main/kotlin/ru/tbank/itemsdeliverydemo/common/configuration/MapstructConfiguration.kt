@@ -1,10 +1,10 @@
 package ru.tbank.itemsdeliverydemo.common.configuration
 
 import org.mapstruct.MapperConfig
-import org.springframework.context.annotation.Configuration
+import org.springframework.boot.autoconfigure.AutoConfiguration
 
 @MapperConfig(
     componentModel = "spring"
 )
-@Configuration
+@AutoConfiguration
 class MapstructConfiguration

@@ -1,13 +1,9 @@
 package ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.configuration.TelegramClientServiceConfiguration
 import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.dto.SendMessageRequest
 
-@Service
-@ConditionalOnProperty(prefix = "service.telegram", name = ["enabled"], havingValue = "true")
 class TelegramClientService(
     private val webClient: WebClient,
     private val conf: TelegramClientServiceConfiguration,

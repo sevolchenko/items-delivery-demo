@@ -1,7 +1,5 @@
 package ru.tbank.itemsdeliverydemo.operatorback.client
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.operatorback.client.configuration.OperatorBackClientConfiguration
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.PickupTaskRequest
@@ -10,8 +8,6 @@ import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskRequest
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TakeTaskResponse
 import ru.tbank.itemsdeliverydemo.operatorback.model.dto.TaskResponse
 
-@Service
-@ConditionalOnProperty(prefix = "service.operator-back", name = ["enabled"], havingValue = "true")
 class OperatorBackClientService(
     private val webClient: WebClient,
     private val conf: OperatorBackClientConfiguration,

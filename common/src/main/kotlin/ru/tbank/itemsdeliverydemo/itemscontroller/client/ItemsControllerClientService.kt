@@ -1,7 +1,5 @@
 package ru.tbank.itemsdeliverydemo.itemscontroller.client
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.itemscontroller.client.configuration.ItemsControllerClientConfiguration
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
@@ -9,8 +7,6 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ItemResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemRequest
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemResponse
 
-@Service
-@ConditionalOnProperty(prefix = "service.items-controller", name = ["enabled"], havingValue = "true")
 class ItemsControllerClientService(
     private val webClient: WebClient,
     private val conf: ItemsControllerClientConfiguration,

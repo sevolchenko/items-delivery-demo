@@ -13,4 +13,4 @@ service:
     host: http://localhost/applications-storage
 
   items-controller:
-    host: http://localhost/items-controller
+    host: http://items-controller:8080/
