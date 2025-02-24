@@ -1,20 +1,18 @@
 package ru.tbank.itemsdeliverydemo.applicationsstorage.client
 
 import org.springframework.web.reactive.function.client.WebClient
-import ru.tbank.itemsdeliverydemo.applicationsstorage.client.configuration.ApplicationsStorageClientConfiguration
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.ApplicationResponse
 
 class ApplicationsStorageClientService(
     private val webClient: WebClient,
-    private val conf: ApplicationsStorageClientConfiguration,
 ) {
 
     fun getApplication(
         applicationId: String
     ): ApplicationResponse {
         return webClient.get()
-            .uri("${conf.host}/api/v1/applications/$applicationId")
+            .uri("/api/v1/applications/$applicationId")
             .retrieve()
             .bodyToMono(ApplicationResponse::class.java)
             .block()!!
@@ -25,10 +23,14 @@ class ApplicationsStorageClientService(
         status: ApplicationStatus
     ) {
         webClient.patch()
-            .uri("${conf.host}/api/v1/applications/$applicationId/status")
-            .bodyValue(status)
+            .uri {
+                it
+                    .path("/api/v1/applications/$applicationId/status")
+                    .queryParam("status", status)
+                    .build()
+            }
             .retrieve()
-            .bodyToMono(Void::class.java)
+            .bodyToMono(ApplicationResponse::class.java)
             .block()
     }
 
@@ -40,12 +42,12 @@ class ApplicationsStorageClientService(
         webClient.put()
             .uri {
                 it
-                    .path("${conf.host}/api/v1/applications/$applicationId/products/$productId")
+                    .path("/api/v1/applications/$applicationId/products/$productId")
                     .queryParam("itemNumber", itemNumber)
                     .build()
             }
             .retrieve()
-            .bodyToMono(Void::class.java)
+            .bodyToMono(ApplicationResponse::class.java)
             .block()
     }
 }

@@ -15,7 +15,10 @@ import ru.tbank.itemsdeliverydemo.common.ErrorResponse
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(Exception::class)
     fun handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse("Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity(
+            ErrorResponse("Internal Server Error: ${ex.message}"),
+            HttpStatus.INTERNAL_SERVER_ERROR
+        )
     }
 }
 

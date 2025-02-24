@@ -62,6 +62,8 @@ class ApplicationService(
                     this.itemNumber = itemNumber
                 }
             updatedAt = LocalDateTime.now()
+        }?.let {
+            repository.save(it)
         }
     }
 }

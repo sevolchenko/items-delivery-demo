@@ -1,12 +1,10 @@
 package ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram
 
 import org.springframework.web.reactive.function.client.WebClient
-import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.configuration.TelegramClientServiceConfiguration
-import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.dto.SendMessageRequest
+import ru.tbank.itemsdeliverydemo.notificationcenter.model.dto.SendMessageRequest
 
 class TelegramClientService(
-    private val webClient: WebClient,
-    private val conf: TelegramClientServiceConfiguration,
+    private val webClient: WebClient
 ) {
 
     fun sendMessage(
@@ -19,12 +17,10 @@ class TelegramClientService(
         )
 
         webClient.post()
-            .uri("${host()}/message")
+            .uri("/message")
             .bodyValue(request)
             .retrieve()
             .bodyToMono(String::class.java)
             .block()
     }
-
-    fun host() = conf.host + "/" + conf.apiKey
 }

@@ -8,6 +8,6 @@ create table placement_status_history
     timestamp     timestamp          not null,
     new_status    varchar(50),
 
-    constraint fk_cell foreign key (cell_id) references cells (id) on delete set null
+    constraint fk_cell foreign key (cell_id) references cell (id) on delete set null
 );
 

@@ -9,7 +9,7 @@ spring:
 
 service:
   items-keeper:
-    host: http://localhost/items-keeper
+    host: http://items-keeper:8080
 
   applications-storage:
-    host: http://localhost/applications-storage
+    host: http://applications-storage:8080

@@ -10,7 +10,7 @@ spring:
 
 service:
   applications-storage:
-    host: http://localhost/applications-storage
+    host: http://applications-storage:8080
 
   items-controller:
-    host: http://items-controller:8080/
+    host: http://items-controller:8080

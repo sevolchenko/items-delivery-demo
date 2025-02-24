@@ -61,7 +61,7 @@ services:
   items-keeper:
     container_name: items-keeper
     build:
-      context: .././items-controller
+      context: .././items-keeper
     environment:
       - SPRING_PROFILES_ACTIVE
     ports:
@@ -82,6 +82,7 @@ services:
       context: .././notification-center
     environment:
       - SPRING_PROFILES_ACTIVE
+      - TELEGRAM_API_KEY
     ports:
       - "8085:8080"
   
