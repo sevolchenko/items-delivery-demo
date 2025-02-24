@@ -47,7 +47,7 @@ class ApplicationService(
         return getApplication(integrationId)?.apply {
             this.status = status
             updatedAt = LocalDateTime.now()
-        }
+        }?.also { repository.save(it) }
     }
 
     fun updateProduct(
