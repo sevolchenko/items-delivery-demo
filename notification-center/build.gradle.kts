@@ -17,8 +17,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     implementation(project(":common"))
-
-    runtimeOnly("org.postgresql:postgresql")
 }
 
 tasks.withType<Test> {

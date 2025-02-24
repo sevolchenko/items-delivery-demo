@@ -3,13 +3,13 @@
 -- Document
 create table placement
 (
-    id            uuid primary key                  default gen_random_uuid(),
-    product_id    uuid                  not null,
-    cell_id       uuid                  not null,
-    created_at    timestamp             not null,
-    updated_at    timestamp,
-    status        varchar(50)           not null,
+    id         varchar(255) primary key,
+    product_id varchar(255) not null,
+    cell_id    varchar(255) not null,
+    created_at timestamp    not null,
+    updated_at timestamp,
+    status     varchar(50)  not null,
 
-    constraint fk_cell foreign key (cell_id) references cells (id) on delete set null
+    constraint fk_cell foreign key (cell_id) references cell (id) on delete set null
 );
 

@@ -20,10 +20,12 @@ class CellService(
             request.height,
             request.width
         ).orElseGet {
-            CellDimensions(
-                length = request.length,
-                height = request.height,
-                width = request.width
+            cellDimensionsRepository.save(
+                CellDimensions(
+                    length = request.length,
+                    height = request.height,
+                    width = request.width
+                )
             )
         }
 

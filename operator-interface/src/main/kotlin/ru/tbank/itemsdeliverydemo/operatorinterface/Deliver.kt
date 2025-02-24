@@ -19,6 +19,8 @@ fun main() {
 
         println(task.instructions)
 
+        readlnOrNull()
+
         try {
             client.finishPickup(taskId)
         } catch (e: Exception) {

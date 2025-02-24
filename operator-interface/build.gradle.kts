@@ -10,6 +10,7 @@ dependencies {
     implementation(project(":common"))
 
     implementation("org.springframework:spring-webflux")
+    implementation("io.projectreactor.netty:reactor-netty:1.1.19")
 
 }
 

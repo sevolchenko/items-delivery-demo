@@ -3,7 +3,7 @@
 -- Document
 create table item
 (
-    id              uuid              not null default gen_random_uuid(),
+    id              varchar(255)      not null default gen_random_uuid(),
     type            varchar(255)      not null,
     color           varchar(255)      null     default null,
     status          varchar(255)      not null,

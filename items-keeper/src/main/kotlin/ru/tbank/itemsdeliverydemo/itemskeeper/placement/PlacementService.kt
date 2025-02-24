@@ -33,7 +33,11 @@ class PlacementService(
 
     fun findFreeCell(productType: ProductType): Cell {
         val busyCells = placementRepository.findAllByStatus(PlacementStatus.BUSY).map { it.cell!! }
-        val freeCells = cellRepository.findAllByIdNotIn(busyCells.map { it.id })
+        val freeCells = if (busyCells.isEmpty()) {
+            cellRepository.findAll()
+        } else {
+            cellRepository.findAllByIdNotIn(busyCells.map { it.id })
+        }
 
         return freeCells.filter {
             canFit(it.cellDimensions!!, productType.size)
@@ -55,6 +59,8 @@ class PlacementService(
         return placementRepository.findById(placementId).getOrNull()?.apply {
             status = PlacementStatus.COMPLETED
             updatedAt = LocalDateTime.now()
+        }?.also {
+            placementRepository.save(it)
         }
     }
 }

@@ -1,4 +1,8 @@
 spring:
 
     kafka:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: kafka:9092
+
+service:
+  telegram:
+    host: https://chatter.salebot.pro/api

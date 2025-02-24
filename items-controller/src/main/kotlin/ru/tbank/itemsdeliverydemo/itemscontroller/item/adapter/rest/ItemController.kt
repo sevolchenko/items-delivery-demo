@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.tbank.itemsdeliverydemo.common.ErrorResponse
+import ru.tbank.itemsdeliverydemo.common.handling.ErrorResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.ItemService
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ItemResponse
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.dto.ReserveItemRequest

@@ -1,5 +1,5 @@
 spring:
     datasource:
       username: delivery-demo
-      password: admin
-      url: jdbc:postgresql://localhost:5433/delivery-demo
+      password: password
+      url: jdbc:postgresql://postgresql:5432/items-controller

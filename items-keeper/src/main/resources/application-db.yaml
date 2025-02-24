@@ -1,0 +1,9 @@
+spring:
+    datasource:
+      username: delivery-demo
+      password: password
+      url: jdbc:postgresql://localhost:5433/items-keeper
+
+service:
+  items-controller:
+    host: http://localhost/items-controller

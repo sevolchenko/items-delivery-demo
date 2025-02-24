@@ -12,6 +12,5 @@
     <include file="create_cell_dimensions_table.sql" relativeToChangelogFile="true"/>
     <include file="create_cells_table.sql" relativeToChangelogFile="true"/>
     <include file="create_placements_table.sql" relativeToChangelogFile="true"/>
-    <include file="create_placement_status_history_table.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -77,7 +77,7 @@
     <bpmn:sequenceFlow id="Flow_0ucjo7e" sourceRef="StartEvent_1" targetRef="reserveProductTask" />
     <bpmn:sequenceFlow id="Flow_023fwbx" sourceRef="reserveProductTask" targetRef="Gateway_1x99z2q" />
     <bpmn:sequenceFlow id="Flow_0y6n1w1" sourceRef="Gateway_1x99z2q" targetRef="setApplicationStatusRejectedTask">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!execution.hasVariable("reservedItemId")}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${ null == reservedItemId }</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00ynn6x" sourceRef="Gateway_1x99z2q" targetRef="saveReservedProductTask" />
     <bpmn:sequenceFlow id="Flow_0qgkmyi" sourceRef="saveReservedProductTask" targetRef="setApplicationStatusReservedTask" />

@@ -5,7 +5,7 @@ create table application
 (
     id              bigserial          not null,
     integration_id  varchar(36)        not null,
-    pickup_code     varchar(255)       null     default null,
+    client_id       bigserial          not null,
     status          varchar(255)       not null default 'CREATED',
     created_at      timestamp          not null default now(),
     updated_at      timestamp          null     default null,

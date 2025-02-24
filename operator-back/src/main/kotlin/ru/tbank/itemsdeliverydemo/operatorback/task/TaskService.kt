@@ -59,7 +59,7 @@ class TaskService(
         val cellId = itemsKeeper.placeProduct(product.itemNumber!!)
             .also {
                 task.placementId = it.placementId
-            }.cellId
+            }.cellName
 
         val instructions = instructionsBuilder.buildInstructionsForReservation(
             task.type!!,
@@ -103,7 +103,7 @@ class TaskService(
 
         if (task.status != TaskStatus.WAITING_FOR_PICKUP) error("Task is not in waiting for pickup state")
 
-        val cellId = itemsKeeper.finishPlacement(task.placementId!!).cellId
+        val cellId = itemsKeeper.finishPlacement(task.placementId!!).cellName
 
         val product = storage.getApplication(task.applicationId!!).product()
 
@@ -135,6 +135,8 @@ class TaskService(
     ) = task.apply {
         status = newStatus
         updatedAt = LocalDateTime.now()
+    }.also {
+        repository.save(it)
     }.also {
         statusUpdatedSender.sendStatusUpdated(it)
     }

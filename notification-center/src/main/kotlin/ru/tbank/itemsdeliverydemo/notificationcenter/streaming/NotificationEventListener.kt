@@ -5,7 +5,7 @@ import mu.KLogging
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.TelegramClientService
-import ru.tbank.itemsdeliverydemo.notificationcenter.model.dto.NotificationEvent
+import ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram.dto.NotificationEvent
 
 @Component
 class NotificationEventListener(
