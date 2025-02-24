@@ -13,7 +13,7 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.ApplicationSer
 import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.entity.Application
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
-import ru.tbank.itemsdeliverydemo.common.ErrorResponse
+import ru.tbank.itemsdeliverydemo.common.handling.ErrorResponse
 
 @RestController
 @RequestMapping("/api/v1/applications")

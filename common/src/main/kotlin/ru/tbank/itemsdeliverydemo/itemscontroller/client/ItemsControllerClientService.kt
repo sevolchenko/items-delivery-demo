@@ -24,7 +24,7 @@ class ItemsControllerClientService(
         itemNumber: String
     ): ItemResponse {
         return webClient.get()
-            .uri("/api/v1/$itemNumber")
+            .uri("/api/v1/items/$itemNumber")
             .retrieve()
             .bodyToMono(ItemResponse::class.java)
             .block()!!

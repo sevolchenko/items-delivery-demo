@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.kafka.core.KafkaTemplate
-import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.ApplicationsStorageClientService
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.configuration.ApplicationsStorageClientConfiguration
+import ru.tbank.itemsdeliverydemo.common.handling.WebClientFunctions.webClient
 import ru.tbank.itemsdeliverydemo.common.streaming.KafkaProducer
 import ru.tbank.itemsdeliverydemo.common.streaming.properties.KafkaServers
 import ru.tbank.itemsdeliverydemo.itemscontroller.client.ItemsControllerClientService
@@ -28,8 +28,6 @@ import ru.tbank.itemsdeliverydemo.operatorback.client.configuration.OperatorBack
     KafkaServers::class
 )
 class CommonPackageAutoConfiguration {
-
-    fun webClient(host: String): WebClient = WebClient.create(host)
 
     @Bean
     @ConditionalOnProperty(prefix = "service.applications-storage", name = ["enabled"], havingValue = "true")

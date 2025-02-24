@@ -17,7 +17,7 @@ import java.util.UUID
 data class Item(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
+    val id: String = UUID.randomUUID().toString(),
 
     @Enumerated(EnumType.STRING)
     val type: ProductType? = null,

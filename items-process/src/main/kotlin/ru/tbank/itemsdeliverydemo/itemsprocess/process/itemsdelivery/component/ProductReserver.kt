@@ -19,18 +19,17 @@ class ProductReserver(
 
         val product = application.product()
 
-        return try {
-            ProductReservationResult(
-                product.integrationId,
-                itemsController.reserveItem(product.type).reservedItemId.toString()
-            )
+        val itemId = try {
+            itemsController.reserveItem(product.type).reservedItemId
         } catch (e: Exception) {
             logger.info("Не зарезервировали продукт по заявке $applicationId. Exception: $e")
-            ProductReservationResult(
-                product.integrationId,
-                null
-            )
+            null
         }
+
+        return ProductReservationResult(
+            product.integrationId,
+            itemId
+        )
     }
 
     data class ProductReservationResult(

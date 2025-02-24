@@ -11,7 +11,6 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.ItemRepositor
 import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ItemStatus
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
-import java.util.UUID
 
 @ExtendWith(RandomBeansExtension::class)
 class ItemServiceTest {
@@ -35,7 +34,7 @@ class ItemServiceTest {
 
     @Test
     fun `where item found then return it's id and set status to reserved`(
-        @Random id: UUID,
+        @Random id: String,
         @Random type: ProductType,
         @Random color: String,
     ) {

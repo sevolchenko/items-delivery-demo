@@ -8,7 +8,7 @@ import ru.tbank.itemsdeliverydemo.itemscontroller.item.adapter.jpa.entity.Item
 import ru.tbank.itemsdeliverydemo.itemscontroller.model.ProductType
 
 @Repository
-interface ItemRepository : JpaRepository<Item, Long> {
+interface ItemRepository : JpaRepository<Item, String> {
 
     @Query(
         """

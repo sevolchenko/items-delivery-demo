@@ -22,7 +22,7 @@ class PlacementController(
         @RequestBody request: PlaceProductRequest
     ): ResponseEntity<*> {
         return placementService.placeProduct(request.productId).let {
-            PlacementResponse(placementId = it.id!!, cellId = it.cell!!.id)
+            PlacementResponse(placementId = it.id!!, cellName = it.cell!!.name!!)
         }.let { ResponseEntity.ok().body(it) }
     }
 
@@ -31,7 +31,7 @@ class PlacementController(
         @RequestBody request: FinishPlacementRequest
     ): ResponseEntity<*> {
         return placementService.finishPlacement(request.placementId)?.let {
-            PlacementResponse(placementId = it.id!!, cellId = it.cell!!.id)
+            PlacementResponse(placementId = it.id!!, cellName = it.cell!!.name!!)
         }.let { ResponseEntity.ok().body(it) }
     }
 }

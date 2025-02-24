@@ -18,7 +18,7 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.en
 import ru.tbank.itemsdeliverydemo.applicationsstorage.mapper.ApplicationMapper
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.CreateApplicationRequest
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.PublicApplicationResponse
-import ru.tbank.itemsdeliverydemo.common.ErrorResponse
+import ru.tbank.itemsdeliverydemo.common.handling.ErrorResponse
 
 @RestController
 @RequestMapping("/public/api/v1/applications")

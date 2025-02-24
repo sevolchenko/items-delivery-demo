@@ -39,7 +39,7 @@ class OperatorBackClientService(
 
     fun finishPickup(id: String): TaskResponse {
         return webClient.post()
-            .uri("}/api/v1/tasks/$id/finish")
+            .uri("/api/v1/tasks/$id/finish")
             .retrieve()
             .bodyToMono(TaskResponse::class.java)
             .block()!!

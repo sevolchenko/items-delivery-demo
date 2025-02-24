@@ -23,6 +23,8 @@ fun main() {
 
         println(task.instructions)
 
+        readlnOrNull()
+
         try {
             client.finishHandling(taskId)
         } catch (e: Exception) {
