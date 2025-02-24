@@ -41,7 +41,8 @@ class PlacementService(
 
         return freeCells.filter {
             canFit(it.cellDimensions!!, productType.size)
-        }.minBy { square(it.cellDimensions!!) }
+        }.minByOrNull { square(it.cellDimensions!!) }
+            ?: error("Свободных ячеек для такого продукта нет")
     }
 
     private fun square(dim: CellDimensions): Double {

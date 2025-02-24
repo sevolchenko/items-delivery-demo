@@ -19,6 +19,14 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
             HttpStatus.INTERNAL_SERVER_ERROR
         )
     }
+
+    @ExceptionHandler(IllegalStateException::class)
+    fun entityNotFoundException(ex: IllegalStateException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(
+            ErrorResponse("Unprocessable entity: ${ex.message}"),
+            HttpStatus.UNPROCESSABLE_ENTITY
+        )
+    }
 }
 
 @RestControllerAdvice

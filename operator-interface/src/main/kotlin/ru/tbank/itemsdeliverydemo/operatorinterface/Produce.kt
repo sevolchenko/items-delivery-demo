@@ -13,7 +13,7 @@ fun main() {
         val task = try {
             client.takeTask(login)
         } catch (e: Exception) {
-            println("Сейчас нет задач, попробуй позже")
+            println("Сейчас нет задач, или нет свободных ячеек на складе")
             continue
         }
 
