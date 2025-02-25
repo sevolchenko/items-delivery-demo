@@ -132,6 +132,7 @@ services:
       - items-keeper
       - items-process
       - operator-back
+      - excamad
 
 volumes:
   postgres-data:
