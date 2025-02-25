@@ -4,6 +4,7 @@ services:
 
   excamad:
     image: kotovdenis/excamad:latest
+    container_name: excamad
     ports:
       - "8090:8080"
 
