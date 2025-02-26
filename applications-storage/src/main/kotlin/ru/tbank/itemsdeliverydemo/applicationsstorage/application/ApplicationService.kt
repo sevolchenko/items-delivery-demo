@@ -13,7 +13,8 @@ import kotlin.jvm.optionals.getOrNull
 @Service
 class ApplicationService(
     private val repository: ApplicationRepository,
-    private val processingStarter: ProcessingStarter
+    private val processingStarter: ProcessingStarter,
+//    private val telegramService: TelegramClientService
 ) {
 
     fun getApplication(
@@ -47,7 +48,13 @@ class ApplicationService(
         return getApplication(integrationId)?.apply {
             this.status = status
             updatedAt = LocalDateTime.now()
-        }?.also { repository.save(it) }
+        }?.also {
+            repository.save(it)
+        }?.also {
+            if (status == ApplicationStatus.COMPLETED) {
+                repository.save(it)
+            }
+        }
     }
 
     fun updateProduct(

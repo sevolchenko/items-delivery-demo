@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.notificationcenter.client.external.telegram
+package ru.tbank.itemsdeliverydemo.common.client.external.telegram
 
 import org.springframework.web.reactive.function.client.WebClient
 import ru.tbank.itemsdeliverydemo.notificationcenter.model.dto.SendMessageRequest
