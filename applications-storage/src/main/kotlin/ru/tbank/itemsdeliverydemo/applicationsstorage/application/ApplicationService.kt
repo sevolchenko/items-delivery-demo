@@ -7,13 +7,15 @@ import ru.tbank.itemsdeliverydemo.applicationsstorage.application.adapter.jpa.en
 import ru.tbank.itemsdeliverydemo.applicationsstorage.component.ProcessingStarter
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.ApplicationStatus
 import ru.tbank.itemsdeliverydemo.applicationsstorage.model.dto.CreateApplicationRequest
+import ru.tbank.itemsdeliverydemo.client.external.telegram.TelegramClientService
 import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Service
 class ApplicationService(
     private val repository: ApplicationRepository,
-    private val processingStarter: ProcessingStarter
+    private val processingStarter: ProcessingStarter,
+    private val telegramService: TelegramClientService
 ) {
 
     fun getApplication(
@@ -47,7 +49,16 @@ class ApplicationService(
         return getApplication(integrationId)?.apply {
             this.status = status
             updatedAt = LocalDateTime.now()
-        }?.also { repository.save(it) }
+        }?.also {
+            repository.save(it)
+        }?.also {
+            if (status in ApplicationStatus.finalStatuses) {
+                telegramService.sendCallback(
+                    it.clientId!!,
+                    APPLICATION_COMPLETED_CALLBACK_NAME
+                )
+            }
+        }
     }
 
     fun updateProduct(
@@ -65,5 +76,9 @@ class ApplicationService(
         }?.let {
             repository.save(it)
         }
+    }
+
+    companion object {
+        const val APPLICATION_COMPLETED_CALLBACK_NAME = "application_completed"
     }
 }

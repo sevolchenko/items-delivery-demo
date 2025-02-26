@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.notificationcenter.model.dto
+package ru.tbank.itemsdeliverydemo.client.external.telegram.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
