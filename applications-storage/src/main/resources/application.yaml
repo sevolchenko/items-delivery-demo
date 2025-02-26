@@ -11,3 +11,9 @@ spring:
   kafka:
     topics:
       start-processing: process.start-processing
+
+
+service:
+  telegram:
+    enabled: true
+    api-key: ${TELEGRAM_API_KEY}

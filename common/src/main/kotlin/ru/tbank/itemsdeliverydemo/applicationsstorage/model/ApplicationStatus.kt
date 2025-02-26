@@ -7,5 +7,9 @@ enum class ApplicationStatus {
     OPERATOR_PROCESSING,
     READY_TO_RECEIVE,
     COMPLETED,
-    REJECTED
+    REJECTED;
+
+    companion object {
+        val finalStatuses = listOf(COMPLETED, REJECTED)
+    }
 }

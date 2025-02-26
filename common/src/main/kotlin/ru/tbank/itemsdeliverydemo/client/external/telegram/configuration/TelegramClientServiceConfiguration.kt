@@ -1,4 +1,4 @@
-package ru.tbank.itemsdeliverydemo.common.client.external.telegram.configuration
+package ru.tbank.itemsdeliverydemo.client.external.telegram.configuration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration

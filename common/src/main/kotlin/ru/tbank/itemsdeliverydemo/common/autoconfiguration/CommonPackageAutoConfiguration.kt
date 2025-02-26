@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.kafka.core.KafkaTemplate
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.ApplicationsStorageClientService
 import ru.tbank.itemsdeliverydemo.applicationsstorage.client.configuration.ApplicationsStorageClientConfiguration
-import ru.tbank.itemsdeliverydemo.common.client.external.telegram.TelegramClientService
-import ru.tbank.itemsdeliverydemo.common.client.external.telegram.configuration.TelegramClientServiceConfiguration
+import ru.tbank.itemsdeliverydemo.client.external.telegram.TelegramClientService
+import ru.tbank.itemsdeliverydemo.client.external.telegram.configuration.TelegramClientServiceConfiguration
 import ru.tbank.itemsdeliverydemo.common.handling.WebClientFunctions.webClient
 import ru.tbank.itemsdeliverydemo.common.streaming.KafkaProducer
 import ru.tbank.itemsdeliverydemo.common.streaming.properties.KafkaServers
