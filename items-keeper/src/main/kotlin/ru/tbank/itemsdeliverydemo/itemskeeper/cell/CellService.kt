@@ -29,6 +29,10 @@ class CellService(
             )
         }
 
+        cellRepository.findByName(request.namePrefix + "0").ifPresent {
+            error("Такой префикс уже существует")
+        }
+
         val names = mutableListOf<String>()
         repeat(request.quantity) { index ->
             val savedCellName = cellRepository.save(
