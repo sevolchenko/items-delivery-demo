@@ -19,7 +19,7 @@ class NotificationSender(
     ) {
         sendMessage(
             getClientId(applicationId),
-            "Мерч готов к получению! Назови оператору код: $pickupCode"
+            "Мерч готов к получению! Назови оператору код: $pickupCode. У тебя есть 10 минут, чтобы забрать заказ"
         )
     }
 
@@ -29,6 +29,15 @@ class NotificationSender(
         sendMessage(
             getClientId(applicationId),
             "К сожалению, на складе не осталось достаточно такого мерча. Попробуй другой тип :)"
+        )
+    }
+
+    fun sendApplicationNotUspel(
+        applicationId: String
+    ) {
+        sendMessage(
+            getClientId(applicationId),
+            "Ты не получил товар за 10 минут, мы отменили твой заказ"
         )
     }
 

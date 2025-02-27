@@ -24,13 +24,14 @@ class StartProcessingEventListener(
     }
 
     fun handle(domain: StartProcessingEvent) {
+        val applicationId = domain.applicationId
         when (domain.event) {
             EventType.START -> {
                 runtimeService.startProcessInstanceByKey(
                     ITEMS_DELIVERY_PROCESS,
-                    domain.applicationId,
+                    applicationId,
                     mapOf(
-                        APPLICATION_ID to domain.applicationId
+                        APPLICATION_ID to applicationId
                     )
                 )
             }
